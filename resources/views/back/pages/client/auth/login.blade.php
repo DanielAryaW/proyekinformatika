@@ -17,8 +17,8 @@
             @endif
 
             @error('login_id')
-                <div class="d-block text-danger" stlye="margin-top: -25px;margin-button: 15px;">
-                    ('email'){{ $message }}
+                <div class="d-block text-danger" style="margin-top: -25px; margin-bottom: 15px;">
+                    {{ $message }}
                 </div>
             @enderror
             <div class="input-group custom">
@@ -30,8 +30,8 @@
             </div>
 
             @error('password')
-                <div class="d-block text-danger" stlye="margin-top: -25px;margin-button: 15px;">
-                    ('password'){{ $message }}
+                <div class="d-block text-danger" style="margin-top: -25px; margin-bottom: 15px;">
+                    {{ $message }}
                 </div>
             @enderror
             <div class="input-group custom">
@@ -45,8 +45,8 @@
                 <div class="col-sm-12">
                     <div class="input-group mb-0">
                         <input class="btn btn-primary btn-lg btn-block" type="submit" value="Sign In">
-                        <a class="btn btn-primary btn-lg btn-block" href="{{ route('client.register') }}">Register</a>
                     </div>
+                    <a class="btn btn-link btn-block" href="{{ route('client.register') }}">Register</a>
                 </div>
             </div>
         </form>

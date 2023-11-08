@@ -105,7 +105,7 @@ return [
             'model' => App\Models\Client::class,
         ],
 
-        'pemilik' => [
+        'pemiliks' => [
             'driver' => 'eloquent',
             'model' => App\Models\Pemilik::class,
         ],
