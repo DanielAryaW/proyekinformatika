@@ -15,13 +15,13 @@ class Authenticate extends Middleware
         //return $request->expectsJson() ? null : route('login');
         if (!$request->expectsJson()) {
             if ($request->routeIs('admin.*')) {
-                session()->flash('fail', 'You must login first');
+                session()->flash('fail', 'Kamu harus Login terlebih dahulu');
                 return route('admin.login');
             } elseif ($request->routeIs('client.*')) {
-                session()->flash('fail', 'You must login first');
+                session()->flash('fail', 'Kamu harus Login terlebih dahulu');
                 return route('client.login');
             } elseif ($request->routeIs('pemilik.*')) {
-                session()->flash('fail', 'You must login first');
+                session()->flash('fail', 'Kamu harus Login terlebih dahulu');
                 return route('pemilik.login');
             }
         }

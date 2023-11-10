@@ -48,7 +48,7 @@ class PemilikController extends Controller
     public function logoutHandler(Request $request)
     {
         Auth::guard('pemilik')->logout();
-        session()->flash('fail', 'Kamu sudah logged out!');
+        session()->flash('success', 'Kamu sudah logged out!');
         return redirect()->route('pemilik.login');
     }
 }

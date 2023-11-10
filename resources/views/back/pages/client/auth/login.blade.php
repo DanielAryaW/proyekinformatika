@@ -16,6 +16,15 @@
                 </div>
             @endif
 
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+
             @error('login_id')
                 <div class="d-block text-danger" style="margin-top: -25px; margin-bottom: 15px;">
                     {{ $message }}

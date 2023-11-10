@@ -8,6 +8,7 @@ Route::prefix('client')->name('client.')->group(function () {
     Route::middleware(['guest:client'])->group(function () {
         Route::view('/login', 'back.pages.client.auth.login')->name('login');
         Route::post('/login_handler', [ClientController::class, 'loginHandler'])->name('login_handler');
+        Route::view('/Login', 'Login')->name('Login');
         Route::view('/register', 'back.pages.client.auth.register')->name('register');
         Route::post('/create', [ClientController::class, 'create'])->name('create');
         Route::post('/check', [ClientController::class, 'check'])->name('check');

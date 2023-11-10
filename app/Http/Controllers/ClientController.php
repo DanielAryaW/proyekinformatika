@@ -93,11 +93,7 @@ class ClientController extends Controller
     public function logoutHandler(Request $request)
     {
         Auth::guard('client')->logout();
-        session()->flash('fail', 'Kamu sudah logged out!');
+        session()->flash('success', 'Kamu sudah logged out!');
         return redirect()->route('client.login');
-    }
-
-    function pesan(Request $requst)
-    {
     }
 }

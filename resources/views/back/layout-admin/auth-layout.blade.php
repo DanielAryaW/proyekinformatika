@@ -72,6 +72,10 @@
                     @yield('content')
                 </div>
             </div>
+            <div class="position-relative top-0 start-0 translate-middle mt-2">
+                <a href="{{ route('pemilik.Login') }}" class="btn btn-outline-primary">
+                    <-- Back </a>
+            </div>
         </div>
     </div>
 

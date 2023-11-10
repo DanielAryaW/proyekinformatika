@@ -1,4 +1,4 @@
-@extends('back.layout.pages-layout')
+@extends('back.layout-admin.pages-layout')
 @section('pageTitle', isset($pageTitle) ? $pageTitle : 'Home')
 @section('content')
     <div class="title pb-20">
