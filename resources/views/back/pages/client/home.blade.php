@@ -473,11 +473,53 @@
 
 
     <!-- Modal untuk Layanan 6 -->
-    <div class="modal fade" id="layanan6-modal" tabindex="-1" role="dialog" aria-labelledby="layanan6-modal-label"
+    <div class="modal fade" id="sticker-modal" tabindex="-1" role="dialog" aria-labelledby="sticker-modal-label"
         aria-hidden="true">
-        <!-- Isi modal untuk Layanan 6 disini -->
-    </div>
+        <!-- Isi modal untuk Poster A3 disini -->
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myLargeModalLabel">
+                        Cetak Sticker
+                    </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        ×
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://s3-alpha-sig.figma.com/img/d574/bee4/4f6d96701b7b00b97bf3fbd025546888?Expires=1698624000&Signature=jvtlBvfQlHeHFu5DwOcoapQV4JjWZlSIG801-dGYh~Z4UxDUXJod-9Lgt7Fz8xm1I6M8bGwNiuSggoLiXHRBiM-V-dDOLjVRMrY6zYC2Oxu4mxDUZyRWKiXiayM1gv88zDDcHcGMM8PjM-sIovCwJYafTgbE9Zkdf-Cz-z4h5b4bWP1sCetwMZwEK8R9bIRWT~017BktkKffROVMkeYjh0N7DeW6w8-e2XVxZuxAw4KzMzxCY6AhBxpzhiYRxbsBOdcuajR4HfaVnTwL1SdDqAWKaPO2BPaqBVOiiTFTe7divnywJmHwJQJslvwThTa7wVd-RAvOh2PdWPjtKW-wGA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
+                        class="card-img-top" alt="Sticker" style="border-radius: 10px; max-width: 300px;">
+                    <h5 class="card-title" style="margin-top: 10px;">Rp. 1.000/lembar</h5>
+                    <p class="card-text">Cetak Stciker anda dengan desain custom dan harga terjangkau.</p>
 
+                    <form>
+                        <div class="form-group">
+                            <label for="customFile">Upload Desain Gambar:</label>
+                            <input type="file" class="form-control-file" id="customFile">
+                        </div>
+                        <div class="form-group">
+                            <label for="quantity">Jumlah Pesanan:</label>
+                            <input type="number" class="form-control" id="quantity"
+                                placeholder="Masukkan jumlah pesanan" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="deskripsi">Deskripsi/Ketentuan Khusus:</label>
+                            <textarea class="form-control" id="deskripsi" rows="4" placeholder="Masukkan deskripsi atau ketentuan khusus"></textarea>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        Tutup
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        Pesan
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- JavaScript -->
     <script>
         // JavaScript untuk menampilkan modals saat tombol "Pesan" pada Card ditekan
