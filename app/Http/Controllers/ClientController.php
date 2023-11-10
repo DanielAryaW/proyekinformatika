@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Client;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
 
 class ClientController extends Controller
 {
@@ -95,5 +96,25 @@ class ClientController extends Controller
         Auth::guard('client')->logout();
         session()->flash('success', 'Kamu sudah logged out!');
         return redirect()->route('client.login');
+    }
+
+    public function forgotPassword(Request $request)
+    {
+        // Validate input
+        $request->validate([
+            'email' => 'required|email|exists:clients,email',
+        ], [
+            'email.exists' => 'This email is not registered in our system',
+        ]);
+
+        // Send password reset link
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
+
+        // Check the status and provide appropriate response
+        return $status === Password::RESET_LINK_SENT
+            ? redirect()->back()->with('status', __($status))
+            : redirect()->back()->withErrors(['email' => __($status)]);
     }
 }

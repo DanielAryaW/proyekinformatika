@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -20,6 +21,14 @@ Route::get('/', function () {
 
 Route::view('/example-page', 'example-page');
 Route::view('/Login', 'Login');
+
+// routes/web.php
+
+Route::prefix('client')->name('client.')->group(function () {
+    Route::view('/forget-password', 'back.pages.client.auth.forget-password')->name('client.forget-password');
+    Route::post('/forget-password', [ClientController::class, 'forgotPassword'])->name('client.forgot-password');
+
+});
 
 
 

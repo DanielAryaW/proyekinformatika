@@ -1,3 +1,5 @@
+<!-- resources/views/back/pages/client/auth/login.blade.php -->
+
 @extends('back.layout-client.auth-layout')
 @section('pageTitle', isset($pageTitle) ? $pageTitle : 'Customer Login')
 @section('content')
@@ -24,6 +26,11 @@
                     </button>
                 </div>
             @endif
+
+            <!-- Add forget password link -->
+            <div class="text-right mb-3">
+                <a href="{{ route('client.forget-password') }}">Forget Password?</a>
+            </div>
 
             @error('login_id')
                 <div class="d-block text-danger" style="margin-top: -25px; margin-bottom: 15px;">
