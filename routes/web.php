@@ -21,5 +21,8 @@ Route::get('/', function () {
 Route::view('/example-page', 'example-page');
 Route::view('/Login', 'Login');
 
+Route::post('/pesan', 'ClientController@pesan')->name('client.pesan');
+
+
 
 

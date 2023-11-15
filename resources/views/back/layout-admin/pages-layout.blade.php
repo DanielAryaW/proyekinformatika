@@ -126,15 +126,21 @@
             <div class="sidebar-menu">
                 <ul id="accordion-menu">
                     <li>
-                        <a href="{{ route('admin.home') }}" class="dropdown-toggle no-arrow">
+                        <a href="{{ route('admin.home') }}" class="dropdown-toggle no-arrow active">
                             <span class="micon bi bi-house"></span>
                             <span class="mtext">Home</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="calendar.html" class="dropdown-toggle no-arrow">
+                        <a href="{{ route('admin.manajemenPesan') }}" class="dropdown-toggle no-arrow">
                             <span class="micon bi bi-cart"></span><span class="mtext">Manajeman Pemesanan</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ route('admin.paketjasa') }}" class="dropdown-toggle no-arrow">
+                            <span class="micon bi bi-bag"></span><span class="mtext">Paket Jasa</span>
                         </a>
                     </li>
 
@@ -163,6 +169,22 @@
     <script src="/back/vendors/scripts/script.min.js"></script>
     <script src="/back/vendors/scripts/process.js"></script>
     <script src="/back/vendors/scripts/layout-settings.js"></script>
+
+    <!-- js -->
+    <script src="/back/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="/back/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/back/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+    <script src="/back/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+    <!-- buttons for Export datatable -->
+    <script src="/back/src/plugins/datatables/js/dataTables.buttons.min.js"></script>
+    <script src="/back/src/plugins/datatables/js/buttons.bootstrap4.min.js"></script>
+    <script src="/back/src/plugins/datatables/js/buttons.print.min.js"></script>
+    <script src="/back/src/plugins/datatables/js/buttons.html5.min.js"></script>
+    <script src="/back/src/plugins/datatables/js/buttons.flash.min.js"></script>
+    <script src="/back/src/plugins/datatables/js/pdfmake.min.js"></script>
+    <script src="/back/src/plugins/datatables/js/vfs_fonts.js"></script>
+    <!-- Datatable Setting js -->
+    <script src="/back/vendors/scripts/datatable-setting.js"></script>
     @stack('scripts')
 </body>
 

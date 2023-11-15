@@ -44,18 +44,6 @@
 </head>
 
 <body class="header-white sidebar-light sidebar-shrink">
-    {{-- <div class="pre-loader">
-        <div class="pre-loader-box">
-            <div class="loader-logo">
-                <img src="/back/vendors/images/deskapp-logo.svg" alt="" />
-            </div>
-            <div class="loader-progress" id="progress_div">
-                <div class="bar" id="bar1"></div>
-            </div>
-            <div class="percent" id="percent1">0%</div>
-            <div class="loading-text">Loading...</div>
-        </div>
-    </div> --}}
 
     <div class="header">
         <div class="header-left">
@@ -111,7 +99,7 @@
     <div class="left-side-bar">
         <div class="brand-logo">
             <a href="http://127.0.0.1:8000/client/home">
-                <img src="/back/vendors/images/printwork-logo.png" alt="" class="dark-logo" />
+                <img src="\back\vendors\images\printwork_logo.png" />
             </a>
             <div class="close-sidebar" data-toggle="left-sidebar-close">
                 <i class="ion-close-round"></i>

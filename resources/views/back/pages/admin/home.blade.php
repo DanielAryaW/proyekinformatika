@@ -9,9 +9,9 @@
             <div class="card-box height-100-p widget-style3">
                 <div class="d-flex flex-wrap">
                     <div class="widget-data">
-                        <div class="weight-700 font-24 text-dark">75</div>
+                        <div class="weight-700 font-24 text-dark">{{ \App\Models\Jasa::count() }}</div>
                         <div class="font-14 text-secondary weight-500">
-                            Appointment
+                            Total Jasa
                         </div>
                     </div>
                     <div class="widget-icon">
@@ -33,7 +33,7 @@
                     </div>
                     <div class="widget-icon">
                         <div class="icon" data-color="#ff5b5b" style="color: rgb(255, 91, 91);">
-                            <span class="icon-copy ti-work"></span>
+                            <span class="icon-copy ti-settings"></span>
                         </div>
                     </div>
                 </div>
@@ -60,8 +60,8 @@
             <div class="card-box height-100-p widget-style3">
                 <div class="d-flex flex-wrap">
                     <div class="widget-data">
-                        <div class="weight-700 font-24 text-dark">$50,000</div>
-                        <div class="font-14 text-secondary weight-500">Earning</div>
+                        <div class="weight-700 font-24 text-dark">Rp. 1.000.000 </div>
+                        <div class="font-14 text-secondary weight-500">Uang masuk</div>
                     </div>
                     <div class="widget-icon">
                         <div class="icon" data-color="#09cc06" style="color: rgb(9, 204, 6);">

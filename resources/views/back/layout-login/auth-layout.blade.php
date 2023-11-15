@@ -24,12 +24,14 @@
     @stack('stylesheets')
 </head>
 
-<body class="login-page">
-    <div class="login-header box-shadow">
+<body class="login-page"
+    style="background: linear-gradient(to right, #072541, #00A9FF); background-size: cover; backdrop-filter: blur(2px);">
+    <div class="login-header box-shadow"
+        style="background: linear-gradient(to right, #00c4ff, #072541); background-size: cover;">
         <div class="container-fluid d-flex justify-content-between align-items-center">
             <div class="brand-logo">
                 <a href="login.html">
-                    <img src="/back/vendors/images/printwork-logo.png" alt="" />
+                    <img src="\back\vendors\images\printwork_logo.png" alt="" />
                 </a>
             </div>
         </div>
@@ -37,8 +39,18 @@
     <div class="login-wrap d-flex align-items-center flex-wrap justify-content-center">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-md-6 col-lg-7">
 
+                <div class="col-md-6 col-lg-7">
+                    <style>
+                        #carouselExampleIndicators {
+                            border-radius: 10px;
+                            overflow: hidden;
+                        }
+
+                        .carousel-item {
+                            border-radius: 10px;
+                        }
+                    </style>
                     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                         <ol class="carousel-indicators">
                             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -47,13 +59,13 @@
                         </ol>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img class="d-block w-100" src="/back/vendors/images/img3.jpg" alt="First slide">
+                                <img class="d-block w-100" src="/back/vendors/images/img3.png" alt="First slide">
                             </div>
                             <div class="carousel-item">
-                                <img class="d-block w-100" src="/back/vendors/images/img4.jpg" alt="Second slide">
+                                <img class="d-block w-100" src="/back/vendors/images/img4.png" alt="Second slide">
                             </div>
                             <div class="carousel-item">
-                                <img class="d-block w-100" src="/back/vendors/images/img5.jpg" alt="Third slide">
+                                <img class="d-block w-100" src="/back/vendors/images/img5.png" alt="Third slide">
                             </div>
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"

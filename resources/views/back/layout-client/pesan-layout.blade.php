@@ -111,7 +111,7 @@
     <div class="left-side-bar">
         <div class="brand-logo">
             <a href="http://127.0.0.1:8000/client/home">
-                <img src="/back/vendors/images/printwork-logo.png" alt="" class="dark-logo" />
+                <img src="\back\vendors\images\printwork_logo.png" />
             </a>
             <div class="close-sidebar" data-toggle="left-sidebar-close">
                 <i class="ion-close-round"></i>

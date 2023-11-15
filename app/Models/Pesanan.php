@@ -19,6 +19,7 @@ class Pesanan extends Model
             $table->string('gambar_path'); // Kolom untuk path gambar
             $table->integer('jumlah_pesanan');
             $table->integer('total_harga');
+            $table->string('deskripsi');
             $table->timestamps();
         });
     }
