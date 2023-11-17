@@ -99,7 +99,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="name">Nama</label>
-                        <input type="text" class="form-control" name="name" placeholder="Enter full name"
+                        <input type="text" class="form-control" name="name" placeholder="Masukan full name"
                             value="{{ old('name') }}">
                         <span class="text-danger">
                             @error('name')
@@ -110,7 +110,7 @@
 
                     <div class="form-group">
                         <label for="name">Username</label>
-                        <input type="text" class="form-control" name="username" placeholder="Enter full name"
+                        <input type="text" class="form-control" name="username" placeholder="Masukan username"
                             value="{{ old('username') }}">
                         <span class="text-danger">
                             @error('username')
@@ -121,7 +121,7 @@
 
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="text" class="form-control" name="email" placeholder="Enter email address"
+                        <input type="text" class="form-control" name="email" placeholder="Masukan alamat email"
                             value="{{ old('email') }}">
                         <span class="text-danger">
                             @error('email')
@@ -131,7 +131,7 @@
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" name="password" placeholder="Enter password"
+                        <input type="password" class="form-control" name="password" placeholder="Masukan password"
                             value="{{ old('password') }}">
                         <span class="text-danger">
                             @error('password')
@@ -142,13 +142,24 @@
                     <div class="form-group">
                         <label for="cpassword">Konfirmasi Password</label>
                         <input type="password" class="form-control" name="cpassword"
-                            placeholder="Enter confirm password" value="{{ old('cpassword') }}">
+                            placeholder="Masukan confirm password" value="{{ old('cpassword') }}">
                         <span class="text-danger">
                             @error('cpassword')
                                 {{ $message }}
                             @enderror
                         </span>
                     </div>
+
+                    <div class="form-group">
+                        <label for="foto_profil">Foto Profil</label>
+                        <input type="file" name="foto_profil" class="form-control" id="foto_profil">
+                        <span class="text-danger">
+                            @error('foto_profil')
+                                {{ $message }}
+                            @enderror
+                        </span>
+                    </div>
+
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Register</button>
                     </div>

@@ -46,4 +46,10 @@ class JasaController extends Controller
         return redirect()->route('admin.paketjasa');
     }
 
+    public function destroy(Jasa $jasa)
+    {
+        // Find the Jasa by ID
+        Jasa::destroy($jasa->id);
+        return redirect('back/pages/admin')->with('success', 'Post has been deleted!');
+    }
 }

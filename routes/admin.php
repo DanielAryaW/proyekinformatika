@@ -17,6 +17,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/paketjasa', [JasaController::class, 'jasa'])->name('paketjasa');
         Route::get('/add', [JasaController::class, 'create'])->name('add');
         Route::post('/add', [JasaController::class, 'store'])->name('store');
+        Route::delete('/delete/{id}', [JasaController::class, 'destroy'])->name('/delete/{id}');
         Route::view('/manajemenPesan', 'back.pages.admin.manajemenPesan')->name('manajemenPesan');
 
         Route::post('/logout_handler', [AdminController::class, 'logoutHandler'])->name('logout_handler');

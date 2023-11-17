@@ -113,7 +113,7 @@
         </div>
     </div>
 
-    <div class="left-side-bar">
+    <div class="left-side-bar open">
         <div class="brand-logo">
             <a href="{{ route('admin.home') }}">
                 <img src="/back/vendors/images/printwork-logo.png" alt="" class="dark-logo" />
@@ -153,7 +153,7 @@
             </div>
         </div>
     </div>
-    <div class="mobile-menu-overlay"></div>
+    <div class="mobile-menu-overlay show"></div>
     <div class="main-container">
         <div class="pd-ltr-20 xs-pd-20-10">
             <div class="pd-20 bg-white border-radius-4 box-shadow mb-30">@yield('content')</div>
@@ -183,6 +183,11 @@
     <script src="/back/src/plugins/datatables/js/buttons.flash.min.js"></script>
     <script src="/back/src/plugins/datatables/js/pdfmake.min.js"></script>
     <script src="/back/src/plugins/datatables/js/vfs_fonts.js"></script>
+
+    {{-- Script Sweet alert --}}
+    <script src="/back/src/plugins/sweetalert2/sweetalert2.all.js"></script>
+    <script src="/back/src/plugins/sweetalert2/sweet-alert.init.js"></script>
+
     <!-- Datatable Setting js -->
     <script src="/back/vendors/scripts/datatable-setting.js"></script>
     @stack('scripts')

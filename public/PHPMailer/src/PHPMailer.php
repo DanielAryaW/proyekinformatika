@@ -3236,8 +3236,7 @@ class PHPMailer
                 2 => $name,
                 3 => $encoding,
                 4 => $type,
-                5 => false,
-                //isStringAttachment
+                5 => false, //isStringAttachment
                 6 => $disposition,
                 7 => $name,
             ];
@@ -3727,8 +3726,7 @@ class PHPMailer
                 2 => static::mb_pathinfo($filename, PATHINFO_BASENAME),
                 3 => $encoding,
                 4 => $type,
-                5 => true,
-                //isStringAttachment
+                5 => true, //isStringAttachment
                 6 => $disposition,
                 7 => 0,
             ];
@@ -3801,8 +3799,7 @@ class PHPMailer
                 2 => $name,
                 3 => $encoding,
                 4 => $type,
-                5 => false,
-                //isStringAttachment
+                5 => false, //isStringAttachment
                 6 => $disposition,
                 7 => $cid,
             ];
@@ -3863,8 +3860,7 @@ class PHPMailer
                 2 => $name,
                 3 => $encoding,
                 4 => $type,
-                5 => true,
-                //isStringAttachment
+                5 => true, //isStringAttachment
                 6 => $disposition,
                 7 => $cid,
             ];

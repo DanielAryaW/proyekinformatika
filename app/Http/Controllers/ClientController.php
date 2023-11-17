@@ -167,7 +167,7 @@ class ClientController extends Controller
         );
 
         if (sendEmail($mailConfig)) {
-            session()->flash('success', 'We have e-mailed your password reset link.');
+            session()->flash('success', 'We have e-mailed your password reset link');
             return redirect()->route('client.forgot-password');
         } else {
             session()->flash('fail', 'Something went wrong!');
