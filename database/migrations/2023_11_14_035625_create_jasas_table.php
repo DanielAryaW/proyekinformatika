@@ -11,9 +11,8 @@ class CreateJasasTable extends Migration
     {
         Schema::create('jasas', function (Blueprint $table) {
             $table->id();
-            $table->string('id_jasa')->unique();
             $table->string('nama_jasa');
-            $table->decimal('harga_jasa', 8, 2);
+            $table->integer('harga_jasa', 8, 2);
             $table->text('deskripsi');
             $table->string('foto_desain')->nullable();
             $table->timestamps();

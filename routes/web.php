@@ -20,9 +20,9 @@ Route::get('/', function () {
 
 Route::view('/example-page', 'example-page');
 Route::view('/Login', 'Login');
+//Route::post('/pesan', 'ClientController@pesan')->name('client.pesan');
 
-Route::post('/pesan', 'ClientController@pesan')->name('client.pesan');
-
-
-
-
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('paketjasa/{id}', 'Paket_controller@edit');
+    Route::put('paket-laundry/{id}', 'Paket_controller@update');
+});

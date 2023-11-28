@@ -10,7 +10,6 @@ class Jasa extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id_jasa',
         'nama_jasa',
         'harga_jasa',
         'deskripsi',

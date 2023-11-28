@@ -121,21 +121,15 @@
             <div class="sidebar-menu">
                 <ul id="accordion-menu">
                     <li>
-                        <a href="{{ route('pemilik.home') }}" class="dropdown-toggle no-arrow">
+                        <a href="{{ route('pemilik.home') }}" class="dropdown-toggle no-arrow active">
                             <span class="micon bi bi-house"></span>
                             <span class="mtext">Dashboard</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="#" class="dropdown-toggle no-arrow">
+                        <a href="{{ route('pemilik.laporanTransaksi') }}" class="dropdown-toggle no-arrow">
                             <span class="micon bi bi-cash"></span><span class="mtext">Laporan Transaksi</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#" class="dropdown-toggle no-arrow">
-                            <span class="micon bi bi-receipt-cutoff"></span><span class="mtext">Invoice</span>
                         </a>
                     </li>
                 </ul>

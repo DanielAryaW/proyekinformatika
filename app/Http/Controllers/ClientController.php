@@ -14,7 +14,6 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Carbon;
 use constGuards;
 use constDefaults;
-
 use App\Models\Pesanan; // Add this line for the Order model
 
 
@@ -242,6 +241,6 @@ class ClientController extends Controller
         );
 
         sendEmail($mailConfig);
-        return redirect()->route('client.login')->with('success', 'Done!, Your password has been changed. Use new password to login into system.');
+        return redirect()->route('client.login')->with('success', 'Selesai!, Password kamu telah diganti. Gunakan password baru untuk login dalam sistem.');
     }
 }

@@ -122,21 +122,21 @@
                 <ul id="accordion-menu">
                     {{-- Home --}}
                     <li>
-                        <a href="http://127.0.0.1:8000/client/home" class="dropdown-toggle no-arrow">
+                        <a href="{{ route('client.home') }}" class="dropdown-toggle no-arrow">
                             <span class="micon bi bi-house"></span><span class="mtext">Home</span>
                         </a>
                     </li>
 
                     {{-- Pesan --}}
                     <li>
-                        <a href="http://127.0.0.1:8000/client/pesan" class="dropdown-toggle no-arrow active">
-                            <span class="micon bi bi-cart"></span><span class="mtext">Pesan Jasa</span>
+                        <a href="{{ route('client.pesan') }}" class="dropdown-toggle no-arrow active">
+                            <span class="micon bi bi-cart"></span><span class="mtext">Pesanan</span>
                         </a>
                     </li>
 
                     {{-- Transaksi --}}
                     <li>
-                        <a href="http://127.0.0.1:8000/client/transaksi" class="dropdown-toggle no-arrow">
+                        <a href="{{ route('client.transaksi') }}" class="dropdown-toggle no-arrow">
                             <span class="micon bi bi-receipt-cutoff"></span><span class="mtext">Transaksi</span>
                         </a>
                     </li>

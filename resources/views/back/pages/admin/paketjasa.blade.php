@@ -1,6 +1,11 @@
 @extends('back.layout-admin.paketJasa-layout')
 @section('pageTitle', isset($pageTitle) ? $pageTitle : 'Paket Jasa')
 @section('content')
+    @if (Session::has('success'))
+        <div class="alert alert-success">
+            {{ Session::get('success') }}
+        </div>
+    @endif
     <div class="row">
         <div class="col-md-12">
             <h4>{{ $title }}</h4>
@@ -17,12 +22,12 @@
                         <table class="data-table table stripe hover nowrap">
                             <thead>
                                 <tr>
-                                    <th class="table-plus datatable-nosort">Nama</th>
+                                    <th class="table-plus datatable">Nama</th>
                                     <th>Harga</th>
-                                    <th>Deskripsi</th>
-                                    <th>Foto</th>
-                                    <th>Created at</th>
-                                    <th>Update at</th>
+                                    <th class="table-plus datatable-nosort">Deskripsi</th>
+                                    <th class="table-plus datatable-nosort">Foto</th>
+                                    <th class="table-plus datatable">Created at</th>
+                                    <th class="table-plus datatable">Update at</th>
                                     <th class="datatable-nosort">Action</th>
                                 </tr>
                             </thead>
@@ -34,23 +39,27 @@
                                         <td>{{ $dt->deskripsi }}</td>
                                         <td>
                                             <img src="{{ asset('upload_folder/' . $dt->foto_desain) }}" alt="Foto Desain"
-                                                width="50">
+                                                width="70">
                                         </td>
                                         <td>{{ $dt->created_at }}</td>
                                         <td>{{ $dt->updated_at }}</td>
                                         <td>
-                                            <div class="dropdown">
-                                                <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
-                                                    href="#" role="button" data-toggle="dropdown">
-                                                    <i class="dw dw-more"></i>
-                                                </a>
 
-                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                                    <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i>
-                                                        Edit</a>
-                                                    <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i>
-                                                        Delete</a>
-                                                </div>
+                                            <div>
+                                                <a href="{{ route('admin.edit', ['id' => $dt->id]) }}"
+                                                    class="btn btn-warning btn-xs btn-edit" id="edit">
+                                                    <i class="fa fa-pencil-square-o"></i>
+                                                </a>
+                                                <form action="{{ route('admin.delete', ['id' => $dt->id]) }}"
+                                                    method="post" style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" onclik="return confirm('Are you Sure ?')"
+                                                        class="btn btn-danger btn-xs btn-hapus" id="delete">
+                                                        <i class="fa fa-trash-o"></i>
+                                                    </button>
+                                                </form>
+
                                             </div>
                                         </td>
                                     </tr>
@@ -59,4 +68,5 @@
                         </table>
                     </div>
                 </div>
-            @endsection
+            </div>
+        @endsection

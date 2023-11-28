@@ -120,6 +120,17 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="name">Alamat</label>
+                        <input type="text" class="form-control" name="alamat" placeholder="Masukan alamat"
+                            value="{{ old('alamat') }}">
+                        <span class="text-danger">
+                            @error('alamat')
+                                {{ $message }}
+                            @enderror
+                        </span>
+                    </div>
+
+                    <div class="form-group">
                         <label for="email">Email</label>
                         <input type="text" class="form-control" name="email" placeholder="Masukan alamat email"
                             value="{{ old('email') }}">

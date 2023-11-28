@@ -12,6 +12,7 @@ Route::prefix('pemilik')->name('pemilik.')->group(function () {
 
     Route::middleware(['auth:pemilik', 'PreventBackHistory'])->group(function () {
         Route::view('/home', 'back.pages.pemilik.home')->name('home');
+        Route::view('/laporanTransaksi', 'back.pages.pemilik.laporanTransaksi')->name('laporanTransaksi');
         Route::post('/logout_handler', [PemilikController::class, 'logoutHandler'])->name('logout_handler');
     });
 });

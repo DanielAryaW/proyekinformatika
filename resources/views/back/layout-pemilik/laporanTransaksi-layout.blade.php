@@ -62,12 +62,12 @@
             <div class="menu-icon bi bi-list"></div>
             <div class="search-toggle-icon bi bi-search" data-toggle="header_search"></div>
             <div class="header-search">
-                <div>Selamat Datang, {{ Auth::guard('admin')->user()->name }}!</div>
+                <div>Selamat Datang, {{ Auth::guard('pemilik')->user()->name }}!</div>
             </div>
         </div>
         <div class="header-right">
 
-            @if (Auth::guard('admin')->check())
+            @if (Auth::guard('pemilik')->check())
                 <div class="user-info-dropdown">
                     <div class="dropdown">
                         <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
@@ -75,19 +75,19 @@
                                 <img src="/back/vendors/images/photo1.jpg" alt="" />
                             </span>
                             <span class="user-name">
-                                {{ Auth::guard('admin')->user()->name }}
+                                {{ Auth::guard('pemilik')->user()->name }}
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                            <a class="dropdown-item" href="{{ route('admin.logout_handler') }}"
-                                onclick="event.preventDefault();document.getElementById('adminLogoutForm').submit();"><i
+                            <a class="dropdown-item" href="{{ route('pemilik.logout_handler') }}"
+                                onclick="event.preventDefault();document.getElementById('pemilikLogoutForm').submit();"><i
                                     class="dw dw-logout"></i> Log Out</a>
-                            <form action="{{ route('admin.logout_handler') }}" id="adminLogoutForm" method="POST">
+                            <form action="{{ route('pemilik.logout_handler') }}" id="pemilikLogoutForm" method="POST">
                                 @csrf</form>
                         </div>
                     </div>
                 </div>
-            @elseif(Auth::guard('customer')->check())
+            @elseif(Auth::guard('client')->check())
                 <div class="user-info-dropdown">
                     <div class="dropdown">
                         <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
@@ -95,16 +95,11 @@
                                 <img src="/back/vendors/images/photo1.jpg" alt="" />
                             </span>
                             <span class="user-name">
-                                {{ Auth::guard('customer')->user()->name }}
+                                {{ Auth::guard('client')->user()->name }}
                             </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                            <a class="dropdown-item" href="{{ route('customer.logout_handler') }}"
-                                onclick="event.preventDefault();document.getElementById('customerLogoutForm').submit();"><i
-                                    class="dw dw-logout"></i> Log Out</a>
-                            <form action="{{ route('customer.logout_handler') }}" id="customerLogoutForm"
-                                method="POST">
-                                @csrf</form>
+                            <a class="dropdown-item" href="login.html"><i class="dw dw-logout"></i> Log Out</a>
                         </div>
                     </div>
                 </div>
@@ -113,9 +108,9 @@
         </div>
     </div>
 
-    <div class="left-side-bar open">
+    <div class="left-side-bar">
         <div class="brand-logo">
-            <a href="{{ route('admin.home') }}">
+            <a href="{{ route('pemilik.home') }}">
                 <img src="/back/vendors/images/printwork-logo.png" alt="" class="dark-logo" />
             </a>
             <div class="close-sidebar" data-toggle="left-sidebar-close">
@@ -126,34 +121,22 @@
             <div class="sidebar-menu">
                 <ul id="accordion-menu">
                     <li>
-                        <a href="{{ route('admin.home') }}" class="dropdown-toggle no-arrow">
+                        <a href="{{ route('pemilik.home') }}" class="dropdown-toggle no-arrow">
                             <span class="micon bi bi-house"></span>
-                            <span class="mtext">Home</span>
+                            <span class="mtext">Dashboard</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="{{ route('admin.manajemenPesan') }}" class="dropdown-toggle no-arrow">
-                            <span class="micon bi bi-cart"></span><span class="mtext">Manajeman Pemesanan</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="{{ route('admin.paketjasa') }}" class="dropdown-toggle no-arrow active">
-                            <span class="micon bi bi-bag"></span><span class="mtext">Paket Jasa</span>
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="invoice.html" class="dropdown-toggle no-arrow">
-                            <span class="micon bi bi-receipt-cutoff"></span><span class="mtext">Invoice</span>
+                        <a href="{{ route('pemilik.laporanTransaksi') }}" class="dropdown-toggle no-arrow active">
+                            <span class="micon bi bi-cash"></span><span class="mtext">Laporan Transaksi</span>
                         </a>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
-    <div class="mobile-menu-overlay show"></div>
+    <div class="mobile-menu-overlay"></div>
     <div class="main-container">
         <div class="pd-ltr-20 xs-pd-20-10">
             <div class="pd-20 bg-white border-radius-4 box-shadow mb-30">@yield('content')</div>
@@ -183,13 +166,9 @@
     <script src="/back/src/plugins/datatables/js/buttons.flash.min.js"></script>
     <script src="/back/src/plugins/datatables/js/pdfmake.min.js"></script>
     <script src="/back/src/plugins/datatables/js/vfs_fonts.js"></script>
-
-    {{-- Script Sweet alert --}}
-    <script src="/back/src/plugins/sweetalert2/sweetalert2.all.js"></script>
-    <script src="/back/src/plugins/sweetalert2/sweet-alert.init.js"></script>
-
     <!-- Datatable Setting js -->
     <script src="/back/vendors/scripts/datatable-setting.js"></script>
+
     @stack('scripts')
 </body>
 
