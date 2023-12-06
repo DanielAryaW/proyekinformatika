@@ -145,7 +145,7 @@
             </div>
         </div>
     </div>
-    <div class="mobile-menu-overlay"></div>
+    <div class="mobile-menu-overlay show"></div>
     <div class="main-container">
         <div class="pd-ltr-20 xs-pd-20-10">
             <div class="pd-20 bg-white border-radius-4 box-shadow mb-30">@yield('content')</div>
@@ -161,6 +161,27 @@
     <script src="/back/vendors/scripts/script.min.js"></script>
     <script src="/back/vendors/scripts/process.js"></script>
     <script src="/back/vendors/scripts/layout-settings.js"></script>
+
+    <!-- js -->
+    <script src="/back/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="/back/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/back/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
+    <script src="/back/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
+    <!-- buttons for Export datatable -->
+    <script src="/back/src/plugins/datatables/js/dataTables.buttons.min.js"></script>
+    <script src="/back/src/plugins/datatables/js/buttons.bootstrap4.min.js"></script>
+    <script src="/back/src/plugins/datatables/js/buttons.print.min.js"></script>
+    <script src="/back/src/plugins/datatables/js/buttons.html5.min.js"></script>
+    <script src="/back/src/plugins/datatables/js/buttons.flash.min.js"></script>
+    <script src="/back/src/plugins/datatables/js/pdfmake.min.js"></script>
+    <script src="/back/src/plugins/datatables/js/vfs_fonts.js"></script>
+
+    {{-- Script Sweet alert --}}
+    <script src="/back/src/plugins/sweetalert2/sweetalert2.all.js"></script>
+    <script src="/back/src/plugins/sweetalert2/sweet-alert.init.js"></script>
+
+    <!-- Datatable Setting js -->
+    <script src="/back/vendors/scripts/datatable-setting.js"></script>
     @stack('scripts')
 </body>
 

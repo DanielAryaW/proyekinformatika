@@ -1,11 +1,6 @@
 @extends('back.layout-admin.paketJasa-layout')
 @section('pageTitle', isset($pageTitle) ? $pageTitle : 'Paket Jasa')
 @section('content')
-    @if (Session::has('success'))
-        <div class="alert alert-success">
-            {{ Session::get('success') }}
-        </div>
-    @endif
     <div class="row">
         <div class="col-md-12">
             <h4>{{ $title }}</h4>
@@ -50,12 +45,13 @@
                                                     class="btn btn-warning btn-xs btn-edit" id="edit">
                                                     <i class="fa fa-pencil-square-o"></i>
                                                 </a>
-                                                <form action="{{ route('admin.delete', ['id' => $dt->id]) }}"
-                                                    method="post" style="display:inline;">
+                                                <form id="delete-form-{{ $dt->id }}"
+                                                    action="{{ route('admin.delete', ['id' => $dt->id]) }}" method="post"
+                                                    style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" onclik="return confirm('Are you Sure ?')"
-                                                        class="btn btn-danger btn-xs btn-hapus" id="delete">
+                                                    <button type="button" class="btn btn-danger btn-xs btn-hapus"
+                                                        id="delete-{{ $dt->id }}" data-id="{{ $dt->id }}">
                                                         <i class="fa fa-trash-o"></i>
                                                     </button>
                                                 </form>
@@ -69,4 +65,61 @@
                     </div>
                 </div>
             </div>
+            <script>
+                // Fungsi untuk menampilkan SweetAlert saat tombol hapus diklik
+                function confirmDelete(id) {
+                    Swal.fire({
+                        title: "Are you sure?",
+                        text: "You won't be able to revert this!",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, delete it!"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Lakukan penghapusan data
+                            fetch('/admin/delete/' + id, {
+                                    method: 'DELETE',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                    }
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    // Tampilkan SweetAlert konfirmasi penghapusan berhasil
+                                    Swal.fire({
+                                        title: "Deleted!",
+                                        text: data.message,
+                                        icon: "success"
+                                    }).then(() => {
+                                        // Redirect atau lakukan tindakan lain setelah penghapusan berhasil
+                                        window.location.href = "/admin/paketjasa";
+                                    });
+                                })
+                                .catch(error => {
+                                    // Tampilkan SweetAlert jika terjadi kesalahan
+                                    Swal.fire({
+                                        title: "Error!",
+                                        text: "An error occurred while deleting the record.",
+                                        icon: "error"
+                                    });
+                                });
+                        }
+                    });
+                }
+
+                // Menghubungkan SweetAlert ke setiap tombol hapus
+                document.querySelectorAll('.btn-hapus').forEach(button => {
+                    button.addEventListener('click', () => {
+                        // Mendapatkan id dari data yang akan dihapus
+                        let id = button.getAttribute('data-id');
+                        // Menampilkan SweetAlert konfirmasi hapus
+                        confirmDelete(id);
+                    });
+                });
+            </script>
+
         @endsection
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

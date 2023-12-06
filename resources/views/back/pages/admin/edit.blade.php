@@ -9,15 +9,11 @@
                     <p></p>
                 </div>
                 <div class="box-body">
-                    <form action="{{ route('admin.add') }}" method="POST" enctype="multipart/form-data">
-                        @if (Session::has('success'))
-                            <div class="alert alert-success">
-                                {{ Session::get('success') }}
-                            </div>
-                        @endif
+                    <form id="updateForm" action="{{ route('admin.update', ['id' => $data->id]) }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                         <div class="box-body">
-
                             <div class="form-group">
                                 <label for="namaJasa">Nama</label>
                                 <input type="text" name="nama" class="form-control" id="namaJasa"
@@ -32,47 +28,101 @@
 
                             <div class="form-group">
                                 <label for="deskripsiJasa">Deskripsi</label>
-                                <textarea name="deskripsi" class="form-control" id="deskripsiJasa" value="{{ $data->deskripsi }}"></textarea>
+                                <textarea name="deskripsi" class="form-control" id="deskripsiJasa">{{ $data->deskripsi }}</textarea>
                             </div>
 
                             <div class="form-group">
                                 <label for="foto_desain">Foto Desain</label>
-                                <input type="file" name="foto_desain" class="form-control" id="foto_desain"
-                                    value="{{ $data->foto_desain }}">
+                                <input type="file" name="foto_desain" class="form-control" id="foto_desain">
                             </div>
-
                         </div>
                         <!-- /.box-body -->
 
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">Update</button>
+                            <!-- Ganti type menjadi button -->
+                            <button type="button" class="btn btn-primary" id="updateButton">Update</button>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>
     </div>
-@endsection
 
-@section('scripts')
+    <!-- Script SweetAlert dan Update Formulir -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
     <script type="text/javascript">
-        function confirmDelete() {
+        // Fungsi untuk menampilkan SweetAlert saat tombol update diklik
+        function confirmUpdate() {
             Swal.fire({
-                title: "Are you sure?",
-                text: "You will not be able to recover this imaginary file!",
-                icon: "warning",
+                title: "Do you want to save the changes?",
+                showDenyButton: true,
                 showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yes, delete it!",
-                closeOnConfirm: false
-            }).then(function(result) {
+                confirmButtonText: "Save",
+                denyButtonText: "Don't save"
+            }).then((result) => {
                 if (result.isConfirmed) {
-                    // Perform the delete action here
-                    Swal.fire("Deleted!", "Your imaginary file has been deleted.", "success");
+                    // Jika dikonfirmasi, kirim formulir
+                    document.getElementById('updateForm').submit();
+                    Swal.fire("Saved!", "", "success");
+                } else if (result.isDenied) {
+                    // Jika tidak disimpan, tampilkan SweetAlert
+                    Swal.fire("Changes are not saved", "", "info");
                 }
             });
         }
-    @endsection
+
+        // Tangkap klik tombol update dan tampilkan SweetAlert
+        document.getElementById('updateButton').addEventListener('click', function() {
+            confirmUpdate();
+        });
+
+        // Tangkap respons JSON setelah operasi update berhasil
+        function handleUpdateResponse(response) {
+            if (response && response.success) {
+                Swal.fire({
+                    title: "Success!",
+                    text: "Data berhasil diupdate",
+                    icon: "success"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Redirect langsung ke halaman view setelah SweetAlert
+                        window.location.href =
+                            "{{ route('admin.paketjasa') }}"; // Sesuaikan dengan path halaman view yang diinginkan
+                    }
+                });
+            } else {
+                // Tampilkan pesan kesalahan jika respons tidak sesuai
+                Swal.fire({
+                    title: "Error!",
+                    text: response.message || "An error occurred while updating the record.",
+                    icon: "error"
+                });
+            }
+        }
+
+        // Tangkap respons JSON setelah mengirimkan formulir
+        document.getElementById('updateForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+
+            fetch(form.action, {
+                    method: 'PUT',
+                    body: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    },
+                })
+                .then(response => response.json())
+                .then(data => handleUpdateResponse(data))
+                .catch(error => {
+                    // Tangani kesalahan koneksi atau server
+                    Swal.fire({
+                        title: "Error!",
+                        text: "An error occurred while updating the record.",
+                        icon: "error"
+                    });
+                });
+        });
+    </script>
+@endsection

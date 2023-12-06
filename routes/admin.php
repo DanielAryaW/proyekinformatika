@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\JasaController;
+use App\Http\Controllers\PesananController;
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware(['guest:admin', 'PreventBackHistory'])->group(function () {
@@ -17,11 +18,18 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/paketjasa', [JasaController::class, 'jasa'])->name('paketjasa');
         Route::get('/add', [JasaController::class, 'create'])->name('add');
         Route::post('/add', [JasaController::class, 'store'])->name('store');
-        Route::post('/update/{id}', [JasaController::class, 'update'])->name('update');
+
+        // Edit route
         Route::get('/edit/{id}', [JasaController::class, 'edit'])->name('edit');
-        Route::put('/update/{id}', [JasaController::class, 'update'])->name('update');
+
+        // Update route
+        Route::put('/update{id}', [JasaController::class, 'update'])->name('update');
+
+        // Delete route
         Route::delete('/delete/{id}', [JasaController::class, 'destroy'])->name('delete');
+
         Route::view('/manajemenPesan', 'back.pages.admin.manajemenPesan')->name('manajemenPesan');
+
         Route::post('/logout_handler', [AdminController::class, 'logoutHandler'])->name('logout_handler');
     });
 });

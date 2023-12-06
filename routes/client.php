@@ -23,9 +23,14 @@ Route::prefix('client')->name('client.')->group(function () {
         Route::view('/home', 'back.pages.client.home')->name('home');
         Route::view('/pesan', 'back.pages.client.pesan')->name('pesan');
         Route::view('/transaksi', 'back.pages.client.transaksi')->name('transaksi');
+
         Route::post('/logout_handler', [ClientController::class, 'logoutHandler'])->name('logout_handler');
         Route::get('/paketjasa', [JasaController::class, 'jasa'])->name('paketjasa');
         Route::get('/home', [JasaController::class, 'showJasas'])->name('home');
-        Route::post('pesan-jasa', [PesananController::class, 'pesanJasa'])->name('admin.pesan-jasa');
+
+
+        Route::get('/pesan', [PesananController::class, 'pesanan'])->name('pesan');
+        Route::post('/home', [PesananController::class, 'store'])->name('client.pesan.store');
+        Route::put('/update{id}', [PesananController::class, 'update'])->name('update');
     });
 });

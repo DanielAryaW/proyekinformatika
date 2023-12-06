@@ -175,115 +175,96 @@
                 <img src="{{ asset('upload_folder/' . $jasa->foto_desain) }}" alt="Foto Desain" width="500">
                 <h3>{{ $jasa->nama_jasa }}</h3>
                 <p>{{ $jasa->deskripsi }}</p>
-                <button class="btn-pesan" data-toggle="modal" data-target="#modal{{ $jasa->id }}">Pesan</button>
+                <button type="button" class="btn-pesan" data-toggle="modal" data-target="#modal{{ $jasa->id }}"
+                    data-jasa-id="{{ $jasa->id }}">Pesan</button>
             </div>
-        @endforeach
-    </div>
 
-    <!-- Add modals dynamically based on data -->
-    @foreach ($data as $jasa)
-        <div class="modal fade" id="modal{{ $jasa->id }}" tabindex="-1" role="dialog"
-            aria-labelledby="modal-label{{ $jasa->id }}" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="myLargeModalLabel">
-                            {{ $jasa->nama_jasa }}
-                        </h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    </div>
-                    <div class="modal-body">
-                        <img src="{{ asset('upload_folder/' . $jasa->foto_desain) }}" alt="Foto Desain" width="200"
-                            style="border-radius: 10px; max-width: 300px;">
-                        <h5 class="card-title" style="margin-top: 10px;">Rp. {{ $jasa->harga_jasa }}</h5>
-                        <p class="card-text">{{ $jasa->deskripsi }}</p>
-                    </div>
 
-                    {{-- Form pesan jasa --}}
-                    <form action="{{ route('client.pesan') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <div class="form-group">
-                            <label for="customFile">Upload Desain Gambar:</label>
-                            <input type="file" class="form-control-file" id="customFile">
+            <!-- Add modals dynamically based on data -->
+            <div class="modal fade" id="modal{{ $jasa->id }}" tabindex="-1" role="dialog"
+                aria-labelledby="modal-label{{ $jasa->id }}" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myLargeModalLabel">
+                                {{ $jasa->nama_jasa }}
+                            </h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                         </div>
-                        <div class="form-group">
-                            <label for="quantity">Jumlah Pesanan:</label>
-                            <input type="number" class="form-control" id="quantity" placeholder="Masukkan jumlah pesanan"
-                                min="0">
+                        <div class="modal-body">
+                            <img src="{{ asset('upload_folder/' . $jasa->foto_desain) }}" alt="Foto Desain" width="200"
+                                style="border-radius: 10px; max-width: 300px;">
+                            <h5 class="card-title" style="margin-top: 10px;">Rp. {{ $jasa->harga_jasa }}</h5>
+                            <p class="card-text">{{ $jasa->deskripsi }}</p>
                         </div>
-                        <div class="form-group">
-                            <label for="deskripsi">Deskripsi/Ketentuan Khusus:</label>
-                            <textarea class="form-control" id="deskripsi" rows="4" placeholder="Masukkan deskripsi atau ketentuan khusus"></textarea>
-                        </div>
-                    </form>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                        <button type="button" class="btn btn-primary"
-                            onclick="pesanJasa('{{ $jasa->id_jasa }}')">Pesan</button>
-                    </div>
 
+                        {{-- Form pesan jasa --}}
+                        <form id="addForm" action="{{ route('client.home') }}" method="POST"
+                            enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="customFile">Upload Desain Gambar:</label>
+                                <input type="file" class="form-control-file" id="customFile" name="foto_desain">
+                            </div>
+                            <div class="form-group">
+                                <label for="jumlah">Jumlah Pesanan:</label>
+                                <input type="number" class="form-control" id="jumlah_pesan" name="jumlah_pesan"
+                                    placeholder="Masukkan jumlah pesanan" min="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="deskripsi">Deskripsi/Ketentuan Khusus:</label>
+                                <textarea class="form-control" id="deskripsi" name="deskripsi" rows="4"
+                                    placeholder="Masukkan deskripsi atau ketentuan khusus"></textarea>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                <button type="button" class="btn btn-primary" onclick="confirmSubmit()">Pesan</button>
+                            </div>
+                        </form>
+
+                    </div>
                 </div>
             </div>
-        </div>
-    @endforeach
+        @endforeach
 
-    <!-- JavaScript -->
-    <script>
-        var btnPesan = document.querySelectorAll(".btn-pesan");
-        btnPesan.forEach(function(btn) {
-            btn.addEventListener("click", function() {
 
-                // JavaScript untuk menampilkan modals saat tombol "Pesan" pada Card ditekan
-                var submitButtons = document.querySelectorAll(".modal-footer .btn-primary");
-                submitButtons.forEach(function(btn) {
-                    btn.addEventListener("click", function() {
-                        // Ambil data dari form
-                        var form = btn.closest("form");
-                        var fileInput = form.querySelector("#customFile");
-                        var quantityInput = form.querySelector("#quantity");
-                        var deskripsiInput = form.querySelector("#deskripsi");
+        <!-- JavaScript -->
+        <script>
+            // Tutup modal setelah submit
+            var modal = btn.closest(".modal");
+            if (modal) {
+                modal.style.display = "none";
+            }
+        </script>
 
-                        // Ambil data dari tombol pesan yang dipilih
-                        var namaJasa = btn.getAttribute("data-nama");
-                        var hargaJasa = btn.getAttribute("data-harga");
-
-                        // Buat objek data pesanan
-                        var pesananData = {
-                            file: fileInput.files[0],
-                            quantity: quantityInput.value,
-                            deskripsi: deskripsiInput.value,
-                            namaJasa: namaJasa,
-                            hargaJasa: hargaJasa
-                        };
-
-                        // Simpan data menggunakan AJAX
-                        $.ajax({
-                            url: "{{ route('client.pesan') }}",
-                            method: "POST",
-                            data: pesananData,
-                            processData: false,
-                            contentType: false,
-                            success: function(response) {
-                                // Handle response jika diperlukan
-                                console.log(response);
-                            },
-                            error: function(error) {
-                                // Handle error jika diperlukan
-                                console.error(error);
-                            }
-                        });
-
-                        // Tutup modal setelah submit
-                        var modal = btn.closest(".modal");
-                        if (modal) {
-                            modal.style.display = "none";
-                        }
-                    });
-                });
+        <script>
+            // Fungsi untuk menetapkan ID jasa saat tombol "Pesan" diklik
+            $('.btn-pesan').click(function() {
+                var jasaId = $(this).data('jasa-id');
+                $('#addForm input[name="jasa_id"]').val(jasaId);
             });
-        });
-    </script>
 
-    <script script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-@endsection
+            // Fungsi untuk menampilkan SweetAlert saat formulir disubmit
+            function confirmSubmit() {
+                Swal.fire({
+                    title: "Do you want to submit?",
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: "Submit",
+                    denyButtonText: "Don't submit"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire("Saved!", "", "success");
+                        // Jika dikonfirmasi, kirim formulir
+                        document.getElementById('addForm').submit();
+                    } else if (result.isDenied) {
+                        Swal.fire("Changes are not saved", "", "info");
+                    }
+                });
+            }
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    @endsection

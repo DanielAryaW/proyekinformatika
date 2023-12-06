@@ -33,7 +33,7 @@
                     </div>
                     <div class="widget-icon">
                         <div class="icon" data-color="#ff5b5b" style="color: rgb(255, 91, 91);">
-                            <span class="icon-copy ti-heart"></span>
+                            <span class="icon-copy bi bi-bag-heart-fill"></span>
                         </div>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                     </div>
                     <div class="widget-icon">
                         <div class="icon">
-                            <i class="icon-copy fa fa-stethoscope" aria-hidden="true"></i>
+                            <i class="icon-copy bi bi-activity" aria-hidden="true"></i>
                         </div>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
             <div class="card-box height-100-p widget-style3">
                 <div class="d-flex flex-wrap">
                     <div class="widget-data">
-                        <div class="weight-700 font-24 text-dark">$50,000</div>
+                        <div class="weight-700 font-24 text-dark">Rp. 4.000.000</div>
                         <div class="font-14 text-secondary weight-500">Pendapatan</div>
                     </div>
                     <div class="widget-icon">
@@ -72,4 +72,6 @@
             </div>
         </div>
     </div>
+
+
 @endsection

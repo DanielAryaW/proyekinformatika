@@ -9,10 +9,9 @@
                     <p></p>
                 </div>
                 <div class="box-body">
-                    <form action="{{ route('admin.add') }}" method="POST" enctype="multipart/form-data">
+                    <form id="addForm" action="{{ route('admin.add') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="box-body">
-
                             <div class="form-group">
                                 <label for="namaJasa">Nama</label>
                                 <input type="text" name="nama" class="form-control" id="namaJasa"
@@ -34,35 +33,40 @@
                                 <label for="foto_desain">Foto Desain</label>
                                 <input type="file" name="foto_desain" class="form-control" id="foto_desain">
                             </div>
-
                         </div>
                         <!-- /.box-body -->
 
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="button" class="btn btn-primary" id="submitButton"
+                                onclick="confirmSubmit()">Submit</button>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>
     </div>
 
-@endsection
-
-@section('scripts')
+    <!-- Script SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <script type="text/javascript">
-        $(document).ready(function() {
-
-            // btn refresh
-            $('.btn-refresh').click(function(e) {
-                e.preventDefault();
-                $('.preloader').fadeIn();
-                location.reload();
-            })
-
-        })
+        // Fungsi untuk menampilkan SweetAlert saat formulir disubmit
+        function confirmSubmit() {
+            Swal.fire({
+                title: "Do you want to submit?",
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: "Submit",
+                denyButtonText: "Don't submit"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire("Saved!", "", "success");
+                    // Jika dikonfirmasi, kirim formulir
+                    document.getElementById('addForm').submit();
+                } else if (result.isDenied) {
+                    Swal.fire("Changes are not saved", "", "info");
+                }
+            });
+        }
     </script>
-
 @endsection

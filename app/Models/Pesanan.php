@@ -1,5 +1,5 @@
 <?php
-
+// app/Models/Pesanan.php
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,17 +9,9 @@ class Pesanan extends Model
 {
     use HasFactory;
 
-    protected $fillable =
-        [
-            'file',
-            'quantity',
-            'deskripsi',
-            'namaJasa',
-            'hargaJasa'
-        ];
-
-    public function client()
-    {
-        return $this->belongsTo(Client::class);
-    }
+    protected $fillable = [
+        'jumlah',
+        'deskripsi',
+        'foto_desain'
+    ];
 }

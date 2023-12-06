@@ -70,37 +70,65 @@ class JasaController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Validate the request data
+        // Validasi data yang diterima dari formulir
         $request->validate([
-            'nama_jasa' => 'required|string|max:255',
-            'harga_jasa' => 'required|numeric',
+            'nama' => 'required|string|max:255',
+            'harga' => 'required|numeric',
             'deskripsi' => 'required|string',
-            // Add validation rules for other fields as needed
+            'foto_desain' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        // Find the existing record
-        $jasa = Jasa::find($id);
+        // Temukan data yang akan diupdate
+        $jasa = Jasa::findOrFail($id);
+        $oldData = $jasa->toArray();
 
-        // Update the data in the database
+        // handling foto
+        if ($request->hasFile('foto_desain')) {
+            // Hapus foto lama jika ada
+            if ($jasa->foto_desain) {
+                unlink(public_path('upload_folder/' . $jasa->foto_desain));
+            }
+
+            // Upload foto baru
+            $image = $request->file('foto_desain');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('upload_folder'), $imageName);
+
+            // Update the 'foto_desain' field in the database
+            $jasa->update(['foto_desain' => $imageName]);
+        }
+
+
+        // Update data dengan nilai baru
         $jasa->update([
-            'nama_jasa' => $request->input('nama_jasa'),
-            'harga_jasa' => $request->input('harga_jasa'),
+            'nama_jasa' => $request->input('nama'),
+            'harga_jasa' => $request->input('harga'),
             'deskripsi' => $request->input('deskripsi'),
-            'foto_desain' => $request->input('foto_desain'),
         ]);
 
-        // Add a success flash message
-        Session::flash('success', 'Data updated successfully');
+        // Get the updated data
+        $updatedData = $jasa->fresh()->toArray();
+        $isUpdated = $oldData !== $updatedData;
 
-        return redirect()->route('admin.paketjasa');
+        return redirect()->route('admin.paketjasa')->with([
+            'success' => true,
+            'message' => $isUpdated ? 'Data berhasil diupdate' : 'Tidak ada perubahan pada data',
+        ]);
+
+        // return response()->json([
+        //     'success' => true,
+        //     'message' => 'Data berhasil diupdate',
+        //     // 'data' => $updatedData,
+        // ]);
     }
-
 
     public function destroy($id)
     {
         // Find the record and delete it
-        Jasa::findOrFail($id)->delete();
+        $jasa = Jasa::findOrFail($id);
+        $jasa->delete();
 
-        return redirect()->route('admin.paketjasa')->with('success', 'Data deleted successfully');
+        // Berikan respons JSON
+        return response()->json(['message' => 'Data berhasil dihapus']);
     }
 }
