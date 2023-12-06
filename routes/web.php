@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PesananController;
 
 
 /*
@@ -25,4 +26,7 @@ Route::view('/Login', 'Login');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('paketjasa/{id}', 'Paket_controller@edit');
     Route::put('paket-laundry/{id}', 'Paket_controller@update');
+
 });
+
+Route::post('/home', [PesananController::class, 'store'])->name('client.pesan.store');

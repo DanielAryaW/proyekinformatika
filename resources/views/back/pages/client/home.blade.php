@@ -175,10 +175,8 @@
                 <img src="{{ asset('upload_folder/' . $jasa->foto_desain) }}" alt="Foto Desain" width="500">
                 <h3>{{ $jasa->nama_jasa }}</h3>
                 <p>{{ $jasa->deskripsi }}</p>
-                <button type="button" class="btn-pesan" data-toggle="modal" data-target="#modal{{ $jasa->id }}"
-                    data-jasa-id="{{ $jasa->id }}">Pesan</button>
+                <button class="btn-pesan" data-toggle="modal" data-target="#modal{{ $jasa->id }}">Pesan</button>
             </div>
-
 
             <!-- Add modals dynamically based on data -->
             <div class="modal fade" id="modal{{ $jasa->id }}" tabindex="-1" role="dialog"
@@ -199,7 +197,7 @@
                         </div>
 
                         {{-- Form pesan jasa --}}
-                        <form id="addForm" action="{{ route('client.home') }}" method="POST"
+                        <form id="addForm{{ $jasa->id }}" action="{{ route('client.pesan') }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
@@ -219,10 +217,10 @@
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                <button type="button" class="btn btn-primary" onclick="confirmSubmit()">Pesan</button>
+                                <button type="button" class="btn btn-primary"
+                                    onclick="confirmSubmit('{{ $jasa->id }}')">Pesan</button>
                             </div>
                         </form>
-
                     </div>
                 </div>
             </div>
@@ -239,14 +237,11 @@
         </script>
 
         <script>
-            // Fungsi untuk menetapkan ID jasa saat tombol "Pesan" diklik
-            $('.btn-pesan').click(function() {
-                var jasaId = $(this).data('jasa-id');
-                $('#addForm input[name="jasa_id"]').val(jasaId);
-            });
-
             // Fungsi untuk menampilkan SweetAlert saat formulir disubmit
-            function confirmSubmit() {
+            function confirmSubmit(id) {
+                var modal = document.getElementById('modal' + id);
+                var form = modal.querySelector('#addForm' + id);
+
                 Swal.fire({
                     title: "Do you want to submit?",
                     showDenyButton: true,
@@ -256,8 +251,8 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         Swal.fire("Saved!", "", "success");
-                        // Jika dikonfirmasi, kirim formulir
-                        document.getElementById('addForm').submit();
+                        // Jika dikonfirmasi, kirim formulir yang sesuai
+                        form.submit();
                     } else if (result.isDenied) {
                         Swal.fire("Changes are not saved", "", "info");
                     }

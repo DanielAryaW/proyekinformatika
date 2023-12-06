@@ -30,7 +30,7 @@ Route::prefix('client')->name('client.')->group(function () {
 
 
         Route::get('/pesan', [PesananController::class, 'pesanan'])->name('pesan');
-        Route::post('/home', [PesananController::class, 'store'])->name('client.pesan.store');
+        Route::post('/pesan', [PesananController::class, 'store'])->name('client.pesan.store');
         Route::put('/update{id}', [PesananController::class, 'update'])->name('update');
     });
 });

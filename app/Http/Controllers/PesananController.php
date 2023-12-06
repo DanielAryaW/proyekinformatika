@@ -7,26 +7,23 @@ use App\Models\Pesanan;
 use App\Models\Client;
 use App\Models\Jasa;
 
-class PesananController extends Controller
-{
-    public function pesanan()
-    {
+class PesananController extends Controller {
+    public function pesanan() {
         $title = 'Pesananmu!';
         $data = Pesanan::get();
         return view('back.pages.client.pesan', compact('title', 'data'));
     }
 
 
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $request->validate([
-            'foto_desain' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'foto_desain' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5000',
         ]);
 
         $imageName = null;
-        if ($request->hasFile('foto_desain')) {
+        if($request->hasFile('foto_desain')) {
             $image = $request->file('foto_desain');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $imageName = time().'.'.$image->getClientOriginalExtension();
             $image->move(public_path('upload_folder'), $imageName);
         }
 
@@ -46,8 +43,7 @@ class PesananController extends Controller
         return redirect()->route('client.pesan');
     }
 
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         // Validasi data yang diterima dari formulir
         $request->validate([
             'jumlah_pesan' => 'required|numeric',
@@ -60,15 +56,15 @@ class PesananController extends Controller
         $oldData = $pesanan->toArray();
 
         // handling foto
-        if ($request->hasFile('foto_desain')) {
+        if($request->hasFile('foto_desain')) {
             // Hapus foto lama jika ada
-            if ($pesanan->foto_desain) {
-                unlink(public_path('upload_folder/' . $pesanan->foto_desain));
+            if($pesanan->foto_desain) {
+                unlink(public_path('upload_folder/'.$pesanan->foto_desain));
             }
 
             // Upload foto baru
             $image = $request->file('foto_desain');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $imageName = time().'.'.$image->getClientOriginalExtension();
             $image->move(public_path('upload_folder'), $imageName);
 
             // Update the 'foto_desain' field in the database
