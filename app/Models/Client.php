@@ -1,8 +1,6 @@
 <?php
-
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -12,7 +10,7 @@ class Client extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $guard = "client";
+    protected $guard = 'client';
 
     /**
      * The attributes that are mass assignable.
@@ -28,7 +26,7 @@ class Client extends Authenticatable
         'alamat',
         'phone',
         'email_verified_at',
-        'status'
+        'status',
     ];
 
     /**
@@ -50,4 +48,14 @@ class Client extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Define the relationship with Pesanan model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function pesanan()
+    {
+        return $this->hasMany(Pesanan::class, 'client_id');
+    }
 }

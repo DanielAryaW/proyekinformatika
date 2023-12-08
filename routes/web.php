@@ -29,4 +29,4 @@ Route::group(['middleware' => 'auth'], function () {
 
 });
 
-Route::post('/home', [PesananController::class, 'store'])->name('client.pesan.store');
+Route::post('/manajemenPesan', [PesananController::class, 'store'])->name('admin.manajemenPesan.store');

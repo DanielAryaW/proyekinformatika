@@ -15,4 +15,9 @@ class Jasa extends Model
         'deskripsi',
         'foto_desain',
     ];
+
+    public function pesanan()
+    {
+        return $this->hasMany(Pesanan::class, 'jasa_id');
+    }
 }

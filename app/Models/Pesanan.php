@@ -12,6 +12,33 @@ class Pesanan extends Model
     protected $fillable = [
         'jumlah',
         'deskripsi',
-        'foto_desain'
+        'foto_desain',
+        'jasa_id', // Tambahkan kolom jasa_id untuk relasi dengan model Jasa
+        'client_id', // Tambahkan kolom client_id untuk relasi dengan model Client
+        'no_pesanan',
+        'nama_jasa',
+        'nama_pemesan',
+        'harga_total'
+
     ];
+    /**
+     * Define the relationship with Client model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function client()
+    {
+        return $this->belongsTo(Client::class, 'client_id');
+    }
+
+    /**
+     * Define the relationship with Jasa model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function jasa()
+    {
+        return $this->belongsTo(Jasa::class, 'jasa_id');
+    }
+
 }

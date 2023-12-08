@@ -10,32 +10,38 @@
                     <table class="data-table table stripe hover nowrap">
                         <thead>
                             <tr>
-                                <th>Id Pesanan</th>
+                                <th class="datatable-nosort">No Pesanan</th>
+                                <th class="table-plus datatable-nosort">Nama Jasa</th>
+                                <th class="table-plus datatable-nosort">Harga</th>
                                 <th class="table-plus datatable-nosort">Nama Pemesan</th>
-                                <th>Nama Jasa</th>
+                                <th class="table-plus datatable-nosort">Harga total</th>
+                                <th class="table-plus datatable-nosort">Bukti Pembayaran</th>
+                                <th class="table-plus datatable">Jumlah</th>
                                 <th>Deskripsi</th>
-                                <th>Foto Desain</th>
-                                <th>Created at</th>
-                                <th>Bukti Bayar</th>
+                                <th class="table-plus datatable-nosort">Foto</th>
+                                <th class="table-plus datatable">Created at</th>
                                 <th class="datatable-nosort">Status Pemesanan</th>
-                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($data as $dt)
+                            @foreach ($pesanan as $dt)
                                 <tr>
                                     <td class="table-plus">{{ $dt->no_pesanan }}</td>
-                                    <td>{{ $dt->nama_jasa }}</td>
-                                    <td>{{ $dt->nama_pemesan }}</td>
-                                    <td>{{ $dt->hargaJasa }}</td>
-                                    <td>{{ $dt->jumlah }}</td>
-                                    <td>{{ $dt->hargaTotal }}</td>
+                                    <td class="table-plus">{{ $dt->jasa->nama_jasa }}</td>
+                                    <td class="table-plus">{{ number_format($dt->jasa->harga_jasa, 0, ',', '.') }}</td>
+                                    <td class="table-plus">{{ $dt->client->name }}</td>
+                                    <td class="table-plus">{{ number_format($dt->harga_total, 0, ',', '.') }}</td>
+                                    <td>
+                                        <img src="{{ asset('upload_folder/' . $dt->foto_desain) }}" alt="Foto Desain"
+                                            width="70">
+                                    </td>
+                                    <td class="table-plus">{{ $dt->jumlah }}</td>
                                     <td>{{ $dt->deskripsi }}</td>
                                     <td>
-                                        <img src="{{ asset('storage/' . $dt->fotoDesain) }}" alt="Foto Desain"
-                                            style="max-width: 100px;">
+                                        <img src="{{ asset('upload_folder/' . $dt->foto_desain) }}" alt="Foto Desain"
+                                            width="70">
                                     </td>
-                                    <td>{{ $dt->created_at }}</td>
+                                    <td class="table-plus">{{ $dt->created_at }}</td>
                                     <td>
                                         <div class="dropdown">
                                             <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
@@ -44,9 +50,11 @@
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
                                                 <a class="dropdown-item" href="#"><i class="dw dw-edit2"></i>
-                                                    Edit</a>
+                                                    Pending</a>
                                                 <a class="dropdown-item" href="#"><i class="dw dw-delete-3"></i>
-                                                    Delete</a>
+                                                    Proses</a>
+                                                <a class="dropdown-item" href="#"> <i class="dw dw-money"></i>
+                                                    Selesai</a>
                                             </div>
                                         </div>
                                     </td>
