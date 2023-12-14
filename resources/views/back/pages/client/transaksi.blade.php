@@ -33,133 +33,20 @@
                 <thead>
                     <tr>
                         <th>No Pesanan</th>
-                        <th>No Transaksi</th>
                         <th>Nama Jasa</th>
                         <th>Tanggal</th>
                         <th>Total</th>
-                        <th>Metode</th>
                         <th>Status Pemesanan</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td class="table-plus">12345</td>
-                        <td>54321</td>
                         <td>Cetak Banner</td>
                         <td>29-03-2018</td>
                         <td>Rp.100.000</td>
-                        <td>Bayar Ditempat</td>
                         <td>Selesai</td>
                     </tr>
-                    <tr>
-                        <td class="table-plus">83738</td>
-                        <td>12324</td>
-                        <td>Cetak Poster</td>
-                        <td>29-03-2020</td>
-                        <td>Rp.500.000</td>
-                        <td>Bayar Ditempat</td>
-                        <td>Pending</td>
-                    </tr>
-                    <tr>
-                        <td class="table-plus">03234</td>
-                        <td>91023</td>
-                        <td>Cetak Sticker</td>
-                        <td>21-03-2019</td>
-                        <td>Rp.100.000</td>
-                        <td>BCA</td>
-                        <td>Proses</td>
-                    </tr>
-                    <tr>
-                        <td class="table-plus">43422</td>
-                        <td>12413</td>
-                        <td>Cetak Undangan Pernikahan</td>
-                        <td>15-07-2021</td>
-                        <td>Rp.1.000.000</td>
-                        <td>BCA</td>
-                        <td>Selesai</td>
-                    </tr>
-                    <tr>
-                        <td class="table-plus">43151</td>
-                        <td>81034</td>
-                        <td>Cetak Poster</td>
-                        <td>29-03-2019</td>
-                        <td>Rp.500.000</td>
-                        <td>Bayar Ditempat</td>
-                        <td>Batal</td>
-                    </tr>
-                    <tr>
-                        <td class="table-plus">52323</td>
-                        <td>09124</td>
-                        <td>Cetak Amplop</td>
-                        <td>29-03-2018</td>
-                        <td>Rp.300.000</td>
-                        <td>BCA</td>
-                        <td>Selesai</td>
-                    </tr>
-                    <tr>
-                        <td class="table-plus">32523</td>
-                        <td>15354</td>
-                        <td>Cetak Kartu Nama</td>
-                        <td>17-03-2020</td>
-                        <td>Rp.600.000</td>
-                        <td>Bayar Ditempat</td>
-                        <td>Selesai</td>
-                    </tr>
-                    <tr>
-                        <td class="table-plus">12345</td>
-                        <td>54321</td>
-                        <td>Cetak Banner</td>
-                        <td>29-03-2018</td>
-                        <td>Rp.100.000</td>
-                        <td>Bayar Ditempat</td>
-                        <td>Selesai</td>
-                    </tr>
-                    <tr>
-                        <td class="table-plus">12345</td>
-                        <td>54321</td>
-                        <td>Cetak Banner</td>
-                        <td>29-03-2018</td>
-                        <td>Rp.100.000</td>
-                        <td>Bayar Ditempat</td>
-                        <td>Selesai</td>
-                    </tr>
-                    <tr>
-                        <td class="table-plus">12345</td>
-                        <td>54321</td>
-                        <td>Cetak Banner</td>
-                        <td>29-03-2018</td>
-                        <td>Rp.100.000</td>
-                        <td>Bayar Ditempat</td>
-                        <td>Selesai</td>
-                    </tr>
-                    <tr>
-                        <td class="table-plus">12345</td>
-                        <td>54321</td>
-                        <td>Cetak Banner</td>
-                        <td>29-03-2018</td>
-                        <td>Rp.100.000</td>
-                        <td>Bayar Ditempat</td>
-                        <td>Selesai</td>
-                    </tr>
-                    <tr>
-                        <td class="table-plus">12345</td>
-                        <td>54321</td>
-                        <td>Cetak Banner</td>
-                        <td>29-03-2018</td>
-                        <td>Rp.100.000</td>
-                        <td>Bayar Ditempat</td>
-                        <td>Selesai</td>
-                    </tr>
-                    <tr>
-                        <td class="table-plus">12345</td>
-                        <td>54321</td>
-                        <td>Cetak Banner</td>
-                        <td>29-03-2018</td>
-                        <td>Rp.100.000</td>
-                        <td>Bayar Ditempat</td>
-                        <td>Selesai</td>
-                    </tr>
-
                 </tbody>
             </table>
         </div>

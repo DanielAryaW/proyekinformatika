@@ -28,9 +28,13 @@ Route::prefix('client')->name('client.')->group(function () {
         Route::get('/paketjasa', [JasaController::class, 'jasa'])->name('paketjasa');
         Route::get('/home', [JasaController::class, 'showJasas'])->name('home');
 
-
-        Route::get('/pesan', [PesananController::class, 'pesanan'])->name('pesan');
-        Route::post('/pesan', [PesananController::class, 'store'])->name('client.pesan.store');
+        Route::get('/pesan', [PesananController::class, 'showPesanan'])->name('pesan');
+        Route::post('/pesan', [PesananController::class, 'store'])->name('store');
+        Route::get('/edit/{id}', [PesananController::class, 'edit'])->name('edit');
         Route::put('/update{id}', [PesananController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [PesananController::class, 'destroy'])->name('delete');
+
+        Route::post('/pesan{id}', [PesananController::class, 'payment'])->name('client.pesan');
+
     });
 });

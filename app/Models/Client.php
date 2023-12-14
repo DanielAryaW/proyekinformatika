@@ -22,11 +22,9 @@ class Client extends Authenticatable
         'username',
         'email',
         'password',
-        'picture',
         'alamat',
         'phone',
-        'email_verified_at',
-        'status',
+        'email_verified_at'
     ];
 
     /**

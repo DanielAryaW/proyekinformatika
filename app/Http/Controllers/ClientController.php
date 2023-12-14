@@ -27,7 +27,6 @@ class ClientController extends Controller
             'username' => 'required',
             'email' => 'required|email|unique:clients,email',
             'password' => 'required|min:5|max:30',
-            'picture' => 'min:5|max:64',
             'alamat' => 'min:5|max:64',
             'phone' => 'min:5|max:20',
             'cpassword' => 'required|min:5|max:30|same:password'
@@ -37,7 +36,6 @@ class ClientController extends Controller
         $client->name = $request->name;
         $client->username = $request->username;
         $client->email = $request->email;
-        $client->picture = $request->picture;
         $client->alamat = $request->alamat;
         $client->phone = $request->phone;
         $client->password = \Hash::make($request->password);

@@ -18,7 +18,8 @@ class Pesanan extends Model
         'no_pesanan',
         'nama_jasa',
         'nama_pemesan',
-        'harga_total'
+        'harga_total',
+        'bukti_pembayaran'
 
     ];
     /**

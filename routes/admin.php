@@ -30,6 +30,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::view('/manajemenPesan', 'back.pages.admin.manajemenPesan')->name('manajemenPesan');
 
+        Route::get('/manajemenPesan', [PesananController::class, 'pesanan'])->name('manajemenPesan');
+        Route::delete('/delete/{id}', [PesananController::class, 'destroy'])->name('delete');
+
+
+
         Route::post('/logout_handler', [AdminController::class, 'logoutHandler'])->name('logout_handler');
     });
 });

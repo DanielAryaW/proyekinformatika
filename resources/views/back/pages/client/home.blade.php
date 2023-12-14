@@ -200,6 +200,8 @@
                         <form id="addForm{{ $jasa->id }}" action="{{ route('client.pesan') }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
+                            <input type="hidden" name="jasa_id" value="{{ $jasa->id }}">
+                            <!-- Tambahkan input tersembunyi untuk menyimpan jasa_id -->
                             <div class="form-group">
                                 <label for="customFile">Upload Desain Gambar:</label>
                                 <input type="file" class="form-control-file" id="customFile" name="foto_desain">
@@ -225,7 +227,6 @@
                 </div>
             </div>
         @endforeach
-
 
         <!-- JavaScript -->
         <script>

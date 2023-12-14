@@ -120,6 +120,17 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="name">No. Handphone</label>
+                        <input type="number" class="form-control" name="phone" placeholder="Masukkan nomor handphone"
+                            pattern="[0-9]*" value="{{ old('phone') }}">
+                        <span class="text-danger">
+                            @error('phone')
+                                {{ $message }}
+                            @enderror
+                        </span>
+                    </div>
+
+                    <div class="form-group">
                         <label for="name">Alamat</label>
                         <input type="text" class="form-control" name="alamat" placeholder="Masukan alamat"
                             value="{{ old('alamat') }}">
@@ -156,16 +167,6 @@
                             placeholder="Masukan confirm password" value="{{ old('cpassword') }}">
                         <span class="text-danger">
                             @error('cpassword')
-                                {{ $message }}
-                            @enderror
-                        </span>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="foto_profil">Foto Profil</label>
-                        <input type="file" name="foto_profil" class="form-control" id="foto_profil">
-                        <span class="text-danger">
-                            @error('foto_profil')
                                 {{ $message }}
                             @enderror
                         </span>

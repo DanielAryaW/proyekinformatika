@@ -19,7 +19,6 @@ return new class extends Migration {
             $table->string('alamat')->nullable();
             $table->string('phone')->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->enum('status', ['Pending', 'Active'])->default('Pending');
             $table->timestamps();
         });
     }

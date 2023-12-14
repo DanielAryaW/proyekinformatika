@@ -39,7 +39,6 @@
         })(window, document, "script", "dataLayer", "GTM-NXZMQSS");
     </script>
     <!-- End Google Tag Manager -->
-
     @stack('stylesheets')
 </head>
 
