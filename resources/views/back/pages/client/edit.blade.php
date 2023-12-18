@@ -23,7 +23,7 @@
                             <div class="form-group">
                                 <label for="harga">Harga Jasa</label>
                                 <input type="number" name="harga" class="form-control" id="hargaJasa"
-                                    value="{{ $data->jasa->harga_jasa }}" readonly>
+                                    value="{{ number_format($data->jasa->harga_jasa, 0, ',', '.') }}" readonly>
                             </div>
 
 

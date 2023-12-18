@@ -15,6 +15,7 @@ class Pesanan extends Model
         'foto_desain',
         'jasa_id', // Tambahkan kolom jasa_id untuk relasi dengan model Jasa
         'client_id', // Tambahkan kolom client_id untuk relasi dengan model Client
+        'transaksi_id', // Tambahkan kolom transaksi_id untuk relasi dengan model Transaksi
         'no_pesanan',
         'nama_jasa',
         'nama_pemesan',
@@ -40,6 +41,16 @@ class Pesanan extends Model
     public function jasa()
     {
         return $this->belongsTo(Jasa::class, 'jasa_id');
+    }
+
+    /**
+     * Define the relationship with Transaksi model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function transaksi()
+    {
+        return $this->belongsTo(Transaksi::class, 'transaksi_id');
     }
 
 }

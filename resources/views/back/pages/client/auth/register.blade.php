@@ -23,42 +23,72 @@
 
         .container {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
             width: 80%;
         }
 
+        .content {
+            width: 100%;
+            margin: 20px 0;
+        }
+
         .form-container {
-            width: 50%;
             background-color: rgba(255, 255, 255, 0.8);
-            padding: 20px;
+            padding: 15px;
             border-radius: 10px;
             backdrop-filter: blur(10px);
-            margin-left: 40px;
-            /* Menambahkan margin kiri */
+            border-radius: 10px;
+            margin-top: 20px;
+            height: 100%;
+            /* Set tinggi form-container menjadi 100% */
         }
 
         .content {
-            width: 40%;
             color: #fff;
-            text-align: center;
             font-family: Arial, sans-serif;
             padding: 20px;
-            margin-right: 40px;
-            /* Menambahkan margin kanan */
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Semi-transparent background */
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
         }
 
         .content h1 {
             font-size: 24px;
             font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .content img {
+            width: 100%;
+            max-width: 485px;
+            /* Adjusted to ensure the image fits within the container */
+            height: auto;
+            box-shadow: 0px 4px 35px 5px rgba(54.19, 30.25, 30.25, 0.55);
+            border-radius: 50%;
         }
 
         .content p {
             font-size: 16px;
             line-height: 1.5;
+            margin-top: 10px;
+        }
+
+        /* Responsive Styles */
+        @media only screen and (min-width: 768px) {
+            .container {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            .form-container,
+            .content {
+                width: 48%;
+            }
         }
     </style>
-
 
 </head>
 
@@ -173,9 +203,8 @@
                     </div>
 
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Register</button>
+                        <button type="submit" class="btn btn-success">Register</button>
                     </div>
-                    <br>
                     <a href="{{ route('client.login') }}">Saya sudah punya akun</a>
                 </form>
             </div>

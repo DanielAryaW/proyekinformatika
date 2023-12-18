@@ -37,6 +37,7 @@
                         <!-- /.box-body -->
 
                         <div class="box-footer">
+                            <button type="button" class="btn btn-secondary" onclick="goBack()">Back</button>
                             <button type="button" class="btn btn-primary" id="submitButton"
                                 onclick="confirmSubmit()">Submit</button>
                         </div>
@@ -47,26 +48,51 @@
     </div>
 
     <!-- Script SweetAlert -->
+    <!-- Script SweetAlert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <script type="text/javascript">
+        // Fungsi untuk kembali ke tampilan sebelumnya
+        function goBack() {
+            window.history.back();
+        }
+
         // Fungsi untuk menampilkan SweetAlert saat formulir disubmit
         function confirmSubmit() {
-            Swal.fire({
-                title: "Do you want to submit?",
-                showDenyButton: true,
-                showCancelButton: true,
-                confirmButtonText: "Submit",
-                denyButtonText: "Don't submit"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire("Saved!", "", "success");
-                    // Jika dikonfirmasi, kirim formulir
-                    document.getElementById('addForm').submit();
-                } else if (result.isDenied) {
-                    Swal.fire("Changes are not saved", "", "info");
-                }
-            });
+            // Pemeriksaan apakah semua kolom form telah diisi
+            var namaJasa = document.getElementById('namaJasa').value;
+            var hargaJasa = document.getElementById('hargaJasa').value;
+            var deskripsiJasa = document.getElementById('deskripsiJasa').value;
+            var fotoDesain = document.getElementById('foto_desain').value;
+
+            if (namaJasa === '' || hargaJasa === '' || deskripsiJasa === '' || fotoDesain === '') {
+                // Tampilkan peringatan jika ada kolom form yang masih kosong
+                Swal.fire({
+                    title: "Error!",
+                    text: "Please fill in all fields.",
+                    icon: "error",
+                    confirmButtonText: "OK"
+                });
+            } else {
+                // Jika semua kolom form telah diisi, tampilkan SweetAlert konfirmasi
+                Swal.fire({
+                    title: "Do you want to submit?",
+                    showDenyButton: true,
+                    showCancelButton: true,
+                    confirmButtonText: "Submit",
+                    denyButtonText: "Don't submit"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire("Saved!", "", "success");
+                        // Jika dikonfirmasi, kirim formulir
+                        document.getElementById('addForm').submit();
+                    } else if (result.isDenied) {
+                        Swal.fire("Changes are not saved", "", "info");
+                    }
+                });
+            }
         }
     </script>
+
+
 @endsection

@@ -60,7 +60,7 @@
     <div class="header">
         <div class="header-left">
             <div class="menu-icon bi bi-list"></div>
-            <div class="search-toggle-icon bi bi-search" data-toggle="header_search"></div>
+            <div class="search-toggle-icon bi bi-caret-down" data-toggle="header_search"></div>
             <div class="header-search">
                 <div>Selamat Datang, {{ Auth::guard('pemilik')->user()->name }}!</div>
             </div>

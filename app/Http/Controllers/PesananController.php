@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\Pesanan;
 use App\Models\Client;
 use App\Models\Jasa;
+use App\Models\Transaksi;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 
@@ -152,7 +153,7 @@ class PesananController extends Controller
 
         // Check if the pesanan is already paid
         if ($pesanan->bukti_pembayaran) {
-            return redirect()->route('admin.manajemenPesan')->with([
+            return redirect()->route('client.pesan')->with([
                 'error' => true,
                 'message' => 'Pesanan sudah dibayar sebelumnya.',
             ]);
@@ -172,4 +173,22 @@ class PesananController extends Controller
         ]);
     }
 
+
+    public function updateStatus(Request $request, $id)
+    {
+        $transaksi = Transaksi::findOrFail($id);
+        $transaksi->status = $request->status;
+        $transaksi->save();
+
+        return response()->json(['message' => 'Status berhasil diperbarui']);
+    }
+
+    public function getTotalPengerjaan()
+    {
+        // Menghitung jumlah pesanan dengan status 'selesai'
+        $totalPengerjaan = Pesanan::where('status', 'Selesai')->count();
+
+        // Kembalikan nilai totalPengerjaan ke tampilan
+        return view('back.pages.admin.auth.home', ['totalPengerjaan' => $totalPengerjaan]);
+    }
 }

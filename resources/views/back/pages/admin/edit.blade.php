@@ -39,6 +39,7 @@
                         <!-- /.box-body -->
 
                         <div class="box-footer">
+                            <button type="button" class="btn btn-secondary" onclick="goBack()">Back</button>
                             <!-- Ganti type menjadi button -->
                             <button type="button" class="btn btn-primary" id="updateButton">Update</button>
                         </div>
@@ -51,6 +52,10 @@
     <!-- Script SweetAlert dan Update Formulir -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script type="text/javascript">
+        // Fungsi untuk kembali ke tampilan sebelumnya
+        function goBack() {
+            window.history.back();
+        }
         // Fungsi untuk menampilkan SweetAlert saat tombol update diklik
         function confirmUpdate() {
             Swal.fire({

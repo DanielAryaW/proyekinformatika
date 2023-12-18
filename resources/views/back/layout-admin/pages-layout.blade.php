@@ -60,7 +60,7 @@
     <div class="header">
         <div class="header-left">
             <div class="menu-icon bi bi-list"></div>
-            <div class="search-toggle-icon bi bi-search" data-toggle="header_search"></div>
+            <div class="search-toggle-icon bi bi-caret-down" data-toggle="header_search"></div>
             <div class="header-search">
                 <div>Selamat Datang, {{ Auth::guard('admin')->user()->name }}!</div>
             </div>
@@ -144,11 +144,11 @@
                         </a>
                     </li>
 
-                    <li>
+                    {{-- <li>
                         <a href="invoice.html" class="dropdown-toggle no-arrow">
                             <span class="micon bi bi-receipt-cutoff"></span><span class="mtext">Invoice</span>
                         </a>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
         </div>

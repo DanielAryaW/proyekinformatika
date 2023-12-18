@@ -1,7 +1,8 @@
 @extends('back.layout-client.pesan-layout')
 @section('pageTitle', isset($pageTitle) ? $pageTitle : 'Pesanan Jasa')
 @section('content')
-    <style>
+    {{-- <style>
+    
         .action-buttons {
             display: flex;
             gap: 10px;
@@ -410,7 +411,377 @@
         #payModal .modal-buttons button[type="button"]:hover {
             background-color: #003f8f;
         }
+    </style> --}}
+
+    <style>
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            /* Adjust the gap as needed */
+        }
+
+        .edit-button,
+        .delete-button,
+        .pay-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgb(20, 20, 20);
+            border: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+            cursor: pointer;
+            transition-duration: 0.3s;
+            overflow: hidden;
+            position: relative;
+            color: white;
+            /* Set the color to white */
+        }
+
+        .edit-svgIcon,
+        .delete-svgIcon,
+        .pay-svgIcon {
+            width: 17px;
+            transition-duration: 0.3s;
+        }
+
+        .edit-svgIcon path,
+        .delete-svgIcon path,
+        .pay-svgIcon path {
+            fill: white;
+        }
+
+        .edit-button:hover,
+        .delete-button:hover,
+        .pay-button:hover {
+            width: 120px;
+            border-radius: 50px;
+            transition-duration: 0.3s;
+            background-color: rgb(255, 69, 69);
+            align-items: center;
+        }
+
+        .edit-button:hover .edit-svgIcon,
+        .delete-button:hover .delete-svgIcon,
+        .pay-button:hover .pay-svgIcon {
+            width: 20px;
+            transition-duration: 0.3s;
+            transform: translateY(60%);
+            -webkit-transform: rotate(360deg);
+            -moz-transform: rotate(360deg);
+            -o-transform: rotate(360deg);
+            -ms-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+
+        .pay-button::before {
+            display: none;
+            content: "Down Payment";
+            color: white;
+            transition-duration: 0.3s;
+            font-size: 2px;
+        }
+
+        .pay-button:hover::before {
+            display: block;
+            padding-right: 10px;
+            font-size: 13px;
+            opacity: 1;
+            transform: translateY(0px);
+            transition-duration: 0.3s;
+        }
+
+        .edit-button::before {
+            display: none;
+            content: "Edit";
+            color: white;
+            transition-duration: 0.3s;
+            font-size: 2px;
+        }
+
+        .edit-button:hover::before {
+            display: block;
+            padding-right: 10px;
+            font-size: 13px;
+            opacity: 1;
+            transform: translateY(0px);
+            transition-duration: 0.3s;
+        }
+
+        .delete-button::before {
+            display: none;
+            content: "Delete";
+            color: white;
+            transition-duration: 0.3s;
+            font-size: 2px;
+        }
+
+        .delete-button:hover::before {
+            display: block;
+            padding-right: 10px;
+            font-size: 13px;
+            opacity: 1;
+            transform: translateY(0px);
+            transition-duration: 0.3s;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 80%;
+            height: 800%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 40px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10%;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 80%;
+            height: 80%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 40%;
+            /* Adjust the width as needed */
+            position: center;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.164);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: center;
+            top: 10%;
+            left: 10%;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Modal Form Styles */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 10px;
+        }
+
+        input {
+            margin-bottom: 10px;
+            padding: 8px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: flex-end;
+            /* Align buttons to the right */
+            margin-top: 20px;
+            /* Add margin for spacing */
+        }
+
+        .modal-buttons button {
+            padding: 10px;
+            margin-left: 10px;
+            /* Add margin between buttons */
+            cursor: pointer;
+        }
+
+        .modal-buttons button[type="submit"] {
+            background-color: #2156C2;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .modal-buttons button[type="button"] {
+            background-color: #aaa;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .modal-buttons button[type="submit"]:hover,
+        .modal-buttons button[type="button"]:hover {
+            background-color: #003f8f;
+        }
+
+        .resizable-image {
+            max-width: 100%;
+            /* Set the maximum width */
+            max-height: 400px;
+            /* Set the maximum height */
+            width: auto;
+            /* Maintain aspect ratio */
+            height: auto;
+            /* Maintain aspect ratio */
+            margin-top: 3px;
+        }
+
+        .file-upload-form {
+            width: fit-content;
+            height: fit-content;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .file-upload-label input {
+            display: none;
+        }
+
+        .file-upload-label svg {
+            height: 40px;
+            fill: rgb(82, 82, 82);
+            margin-bottom: 10px;
+        }
+
+        .file-upload-label {
+            cursor: pointer;
+            background-color: #ddd;
+            padding: 30px 70px;
+            border-radius: 40px;
+            border: 2px dashed rgb(82, 82, 82);
+            box-shadow: 0px 0px 200px -50px rgba(0, 0, 0, 0.719);
+        }
+
+        .file-upload-design {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .browse-button {
+            background-color: rgb(82, 82, 82);
+            padding: 5px 15px;
+            border-radius: 10px;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .browse-button:hover {
+            background-color: rgb(14, 14, 14);
+        }
+
+        .vue-uploadbox-file-button {
+            font-size: 9px;
+            /* Ukuran font yang lebih kecil */
+            padding: 1px 2px;
+            /* Padding yang lebih kecil */
+        }
+
+        .file-upload-label {
+            padding: 5px 10px;
+            /* Ubah padding sesuai kebutuhan */
+        }
+
+        .file-upload-label svg {
+            height: 40px;
+            /* Ubah tinggi ikon sesuai kebutuhan */
+            margin-bottom: 10px;
+            /* Sesuaikan margin bottom sesuai kebutuhan */
+        }
+
+        .browse-button {
+            padding: 5px 15px;
+            /* Sesuaikan padding tombol sesuai kebutuhan */
+            font-size: 10px;
+            /* Sesuaikan ukuran font tombol sesuai kebutuhan */
+        }
+
+        .file-upload-form {
+            padding: 30px;
+            /* Sesuaikan padding formulir sesuai kebutuhan */
+        }
     </style>
+
     <style>
         .red-text {
             color: red;
@@ -420,6 +791,12 @@
     <div class="row">
         <div class="col-md-12">
             <h4>{{ $title }}</h4>
+            <br>
+            @if (session('error'))
+                <div id="notification" class="alert alert-danger">
+                    {{ session('message') }}
+                </div>
+            @endif
             <br>
             <div class="card-box mb-30">
                 <div class="pb-20">
@@ -452,7 +829,7 @@
                                         <td class="table-plus">Rp. {{ number_format($dt->harga_total, 0, ',', '.') }}</td>
                                         <td>
                                             <img src="{{ asset('upload_folder/' . $dt->foto_desain) }}" alt="Foto Desain"
-                                                width="100">
+                                                width="50">
                                         </td>
                                         <td class="table-plus">{{ $dt->jumlah }}</td>
                                         <td>{{ $dt->deskripsi }}</td>
@@ -651,6 +1028,11 @@
                 }
             </script>
 
+            <script>
+                setTimeout(function() {
+                    document.getElementById('notification').style.display = 'none';
+                }, 5000); // Menghilangkan notifikasi setelah 5 detik
+            </script>
 
 
         @endsection

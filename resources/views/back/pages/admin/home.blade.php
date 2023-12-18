@@ -26,7 +26,7 @@
             <div class="card-box height-100-p widget-style3">
                 <div class="d-flex flex-wrap">
                     <div class="widget-data">
-                        <div class="weight-700 font-24 text-dark">124,551</div>
+                        <div class="weight-700 font-24 text-dark">10</div>
                         <div class="font-14 text-secondary weight-500">
                             Total Pengerjaan
                         </div>
@@ -43,9 +43,9 @@
             <div class="card-box height-100-p widget-style3">
                 <div class="d-flex flex-wrap">
                     <div class="widget-data">
-                        <div class="weight-700 font-24 text-dark">400+</div>
+                        <div class="weight-700 font-24 text-dark">{{ \App\Models\Client::count() }}</div>
                         <div class="font-14 text-secondary weight-500">
-                            Total Kunjungan
+                            Total Pengguna
                         </div>
                     </div>
                     <div class="widget-icon">
