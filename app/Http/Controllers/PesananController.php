@@ -39,12 +39,6 @@ class PesananController extends Controller
         // Ambil data Client berdasarkan ID yang ditemukan
         $client = Client::findOrFail($clientId);
 
-        // Ambil ID jasa yang dipilih oleh pengguna
-        $transaksiId = $request->input('transaksi_id') ?? 1 ?? 2 ?? 3;
-
-        // Ambil data Jasa yang sesuai dengan ID yang dipilih
-        $transaksi = Transaksi::findOrFail($transaksiId);
-
         // Buat nomor pesanan yang unik
         $noPesanan = uniqid();
 
@@ -55,7 +49,6 @@ class PesananController extends Controller
         $data = [
             'jasa_id' => $jasa->id,
             'client_id' => $client->id,
-            'transaksi_id' => $transaksi->id,
             'no_pesanan' => $noPesanan,
             'nama_jasa' => $jasa->nama_jasa,
             'nama_pemesan' => $client->name,
@@ -63,7 +56,6 @@ class PesananController extends Controller
             'deskripsi' => $request->input('deskripsi'),
             'foto_desain' => $imageName,
             'harga_total' => $jasa->harga_jasa * $request->input('jumlah_pesan'),
-            'status' => $transaksi->status, // Set status ke nilai default (misalnya, 1 untuk pending)
             'created_at' => now(),
             'updated_at' => now(),
         ];
@@ -76,7 +68,7 @@ class PesananController extends Controller
 
     public function edit($id)
     {
-        // Fetch the data for the given ID and pass it to the view
+        // mengambil data untuk memberikan ID dan di passing kedalam view
         $data = Pesanan::findOrFail($id);
         $title = "Edit Pesanan $data->nama_jasa";
         return view('back.pages.client.edit', compact('title', 'data'));
@@ -107,7 +99,7 @@ class PesananController extends Controller
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('upload_folder'), $imageName);
 
-            // Update the 'foto_desain' field in the database
+            // Update 'foto_desain' area di database
             $pesanan->update(['foto_desain' => $imageName]);
         }
 
@@ -117,7 +109,7 @@ class PesananController extends Controller
             'deskripsi' => $request->input('deskripsi'),
         ]);
 
-        // Get the updated data
+        // mendapatkan data yang terupdate
         $updatedData = $pesanan->fresh()->toArray();
         $isUpdated = $oldData !== $updatedData;
 
@@ -129,7 +121,7 @@ class PesananController extends Controller
 
     public function destroy($id)
     {
-        // Find the record and delete it
+        // mencari histori id dan hapus
         $pesanan = Pesanan::findOrFail($id);
         $pesanan->delete();
 
@@ -176,29 +168,47 @@ class PesananController extends Controller
         ]);
     }
 
-    public function updateStatus(Request $request, $id)
-    {
-        try {
-            // Validate the incoming request
-            $request->validate([
-                'status' => 'required|in:pending,proses,selesai',
-            ]);
-
-            // Find the pesanan by ID
-            $pesanan = Pesanan::findOrFail($id);
-
-            // Update the status
-            $pesanan->update(['status' => $request->input('status')]);
-
-            return response()->json(['success' => 'Status berhasil diperbarui']);
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Terjadi kesalahan'], 500);
-        }
-    }
     public function showClientPesanan()
     {
         $title = 'Transaksi Pesanan';
         $pesanan = Pesanan::with(['jasa', 'client', 'transaksi'])->get();
         return view('back.pages.client.transaksi', compact('pesanan', 'title'));
     }
+
+
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|string',
+        ]);
+
+        // menemukan pesanan berdasarkan ID
+        $pesanan = Pesanan::findOrFail($id);
+
+        // Update bukti_pembayaran field di database
+        $pesanan->update(['status' => $request->input('status')]);
+
+        return redirect()->route('admin.manajemenPesan')->with([
+            'success' => true,
+            'message' => 'Status pemesanan berhasil diubah',
+        ]);
+    }
+
+    // Controller hitung total pendapatan
+    public function totalPendapatan()
+    {
+        // Mendapatkan total pendapatan dari pesanan-pesanan yang sudah selesai
+        $totalPendapatan = Pesanan::where('status', 'Selesai')->sum('harga_total');
+
+        return view('back.pages.admin.home', compact('totalPendapatan'));
+    }
+
+    public function showPemilikPesanan()
+    {
+        $title = 'Laporan Transaksi';
+        $pesanan = Pesanan::with(['jasa', 'client', 'transaksi'])->get();
+        return view('back.pages.pemilik.laporanTransaksi', compact('pesanan', 'title'));
+    }
+
+
 }

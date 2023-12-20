@@ -22,11 +22,12 @@
                 </div>
             </div>
         </div>
+        <!-- Tampilan Blade -->
         <div class="col-xl-3 col-lg-3 col-md-6 mb-20">
             <div class="card-box height-100-p widget-style3">
                 <div class="d-flex flex-wrap">
                     <div class="widget-data">
-                        <div class="weight-700 font-24 text-dark">10</div>
+                        <div class="weight-700 font-24 text-dark">{{ \App\Models\Pesanan::count() }}</div>
                         <div class="font-14 text-secondary weight-500">
                             Total Pengerjaan
                         </div>
@@ -56,11 +57,13 @@
                 </div>
             </div>
         </div>
+        <!-- Tampilan Blade -->
         <div class="col-xl-3 col-lg-3 col-md-6 mb-20">
             <div class="card-box height-100-p widget-style3">
                 <div class="d-flex flex-wrap">
                     <div class="widget-data">
-                        <div class="weight-700 font-24 text-dark">Rp. 1.000.000 </div>
+                        <div class="weight-700 font-24 text-dark">Rp. {{ number_format($totalPendapatan, 0, ',', '.') }}
+                        </div>
                         <div class="font-14 text-secondary weight-500">Uang masuk</div>
                     </div>
                     <div class="widget-icon">
@@ -71,5 +74,47 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-md-12 mb-20">
+            <div class="card-box">
+                <h2 class="h4 mb-20">Grafik Pesanan Harian</h2>
+                <canvas id="pesananChart" height="100"></canvas>
+            </div>
+        </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Script Chart.js -->
+    <script>
+        // Data dari server (contoh, gantilah dengan data sebenarnya)
+        var dataPesanan = {
+            labels: ["Hari 1", "Hari 2", "Hari 3", "Hari 4", "Hari 5"],
+            datasets: [{
+                label: "Jumlah Pesanan",
+                backgroundColor: "rgba(0, 123, 255, 0.5)",
+                borderColor: "rgba(0, 123, 255, 1)",
+                borderWidth: 1,
+                data: [5, 8, 15, 10, 20],
+            }]
+        };
+
+        // Pengaturan grafik
+        var options = {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+
+        // Ambil elemen canvas
+        var ctx = document.getElementById('pesananChart').getContext('2d');
+
+        // Inisialisasi grafik
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: dataPesanan,
+            options: options
+        });
+    </script>
 @endsection

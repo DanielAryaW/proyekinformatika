@@ -201,6 +201,7 @@
                             enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="jasa_id" value="{{ $jasa->id }}">
+                            <input type="hidden" name="transaksi_id" value="{{ $jasa->id }}">
                             <!-- Tambahkan input tersembunyi untuk menyimpan jasa_id -->
                             <div class="form-group">
                                 <label for="customFile">Upload Desain Gambar:</label>

@@ -1,32 +1,33 @@
+<!-- resources/views/back/layout-client/transaksi-layout.blade.php -->
+
 @extends('back.layout-client.transaksi-layout')
 @section('pageTitle', isset($pageTitle) ? $pageTitle : 'Transaksi')
 @section('content')
+    <style>
+        .status-pending {
+            background-color: #FFA07A;
+            /* Light Salmon */
+        }
+
+        .status-proses {
+            background-color: #ADD8E6;
+            /* Light Blue */
+        }
+
+        .status-selesai {
+            background-color: #90EE90;
+            /* Light Green */
+        }
+    </style>
+
     <div class="min-height-100px">
-        <div class="page-header">
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <div class="title">
-                        <h4>Transaksi Pesanan</h4>
-                    </div>
-                    <nav aria-label="breadcrumb" role="navigation">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item">
-                                <a href="http://127.0.0.1:8000/client/transaksi">Transaksi</a>
-                            </li>
-                            <li class="breadcrumb-item active" aria-current="page">
-                                Transaksi Pesanan
-                            </li>
-                        </ol>
-                    </nav>
-                </div>
-            </div>
-        </div>
+        <!-- ... (kode sebelumnya) ... -->
     </div>
 
     <!-- Export Datatable start -->
     <div class="card-box mb-30">
         <div class="pd-20">
-            <h4 class="text-blue h4">Data Pemesanan</h4>
+            <h4 class="text-blue h4">{{ $title }}</h4>
         </div>
         <div class="pb-20">
             <table class="table hover multiple-select-row data-table-export nowrap">
@@ -42,18 +43,17 @@
                 <tbody>
                     @foreach ($pesanan as $dt)
                         @if (Auth::id() == $dt->client->id)
-                            <tr>
+                            <tr class="status-{{ strtolower($dt->status) }}">
                                 <td class="table-plus">{{ $dt->no_pesanan }}</td>
                                 <td>{{ $dt->jasa->nama_jasa }}</td>
                                 <td>{{ $dt->created_at }}</td>
                                 <td>Rp.{{ number_format($dt->harga_total, 2) }}</td>
-                                <td>{{ $dt->transaksi->status }}</td>
+                                <td>{{ $dt->status }}</td>
                             </tr>
                         @endif
                     @endforeach
                 </tbody>
             </table>
         </div>
-    </div>
     </div>
 @endsection

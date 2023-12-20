@@ -15,7 +15,6 @@ class CreatePesanansTable extends Migration
             $table->id();
             $table->unsignedBigInteger('jasa_id');
             $table->unsignedBigInteger('client_id');
-            $table->unsignedBigInteger('transaksi_id');
             $table->string('no_pesanan')->unique();
             $table->string('nama_jasa');
             $table->string('nama_pemesan');
@@ -24,13 +23,12 @@ class CreatePesanansTable extends Migration
             $table->string('foto_desain')->nullable();
             $table->decimal('harga_total', 10, 2)->nullable(); // Menggunakan decimal untuk harga_total
             $table->string('bukti_pembayaran')->nullable();
-            $table->string('status');
+            $table->string('status')->nullable();
             $table->timestamps();
 
             // Menambahkan foreign key constraints
             $table->foreign('jasa_id')->references('id')->on('jasas');
             $table->foreign('client_id')->references('id')->on('clients');
-            $table->foreign('transaksi_id')->references('id')->on('transaksis');
         });
     }
 

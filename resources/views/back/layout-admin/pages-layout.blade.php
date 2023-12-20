@@ -40,6 +40,21 @@
     </script>
     <!-- End Google Tag Manager -->
 
+    <style>
+        .user-info {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .user-info button {
+            margin-left: 15px;
+        }
+    </style>
+
+
     @stack('stylesheets')
 </head>
 
@@ -68,45 +83,24 @@
         <div class="header-right">
 
             @if (Auth::guard('admin')->check())
-                <div class="user-info-dropdown">
-                    <div class="dropdown">
-                        <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                            <span class="user-icon">
-                                <img src="/back/vendors/images/photo1.jpg" alt="" />
-                            </span>
-                            <span class="user-name">
-                                {{ Auth::guard('admin')->user()->name }}
-                            </span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                            <a class="dropdown-item" href="{{ route('admin.logout_handler') }}"
-                                onclick="event.preventDefault();document.getElementById('adminLogoutForm').submit();"><i
-                                    class="dw dw-logout"></i> Log Out</a>
-                            <form action="{{ route('admin.logout_handler') }}" id="adminLogoutForm" method="POST">
-                                @csrf</form>
-                        </div>
-                    </div>
+                <div class="user-info">
+                    <button class="btn btn-sm btn-flat btn-primary" href="{{ route('admin.logout_handler') }}"
+                        onclick="event.preventDefault();document.getElementById('adminLogoutForm').submit();">
+                        <i class="dw dw-logout"></i> Logout
+                    </button>
+                    <form action="{{ route('admin.logout_handler') }}" id="adminLogoutForm" method="POST">
+                        @csrf
+                    </form>
                 </div>
             @elseif(Auth::guard('customer')->check())
-                <div class="user-info-dropdown">
-                    <div class="dropdown">
-                        <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                            <span class="user-icon">
-                                <img src="/back/vendors/images/photo1.jpg" alt="" />
-                            </span>
-                            <span class="user-name">
-                                {{ Auth::guard('customer')->user()->name }}
-                            </span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                            <a class="dropdown-item" href="{{ route('customer.logout_handler') }}"
-                                onclick="event.preventDefault();document.getElementById('customerLogoutForm').submit();"><i
-                                    class="dw dw-logout"></i> Log Out</a>
-                            <form action="{{ route('customer.logout_handler') }}" id="customerLogoutForm"
-                                method="POST">
-                                @csrf</form>
-                        </div>
-                    </div>
+                <div class="user-info">
+                    <button class="btn btn-sm btn-flat btn-primary" href="{{ route('customer.logout_handler') }}"
+                        onclick="event.preventDefault();document.getElementById('customerLogoutForm').submit();">
+                        <i class="dw dw-logout"></i> Logout
+                    </button>
+                    <form action="{{ route('customer.logout_handler') }}" id="customerLogoutForm" method="POST">
+                        @csrf
+                    </form>
                 </div>
             @endif
 

@@ -30,9 +30,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::view('/manajemenPesan', 'back.pages.admin.manajemenPesan')->name('manajemenPesan');
         Route::get('/manajemenPesan', [PesananController::class, 'pesanan'])->name('manajemenPesan');
         Route::delete('/delete/{id}', [PesananController::class, 'destroy'])->name('delete');
-        // Route::post('/manajemenPesan', [PesananController::class, 'updateStatus'])->name('manajemenPesan');
 
-        Route::post('/manajemenPesan{id}', [PesananController::class, 'updateStatus'])->name('admin.manajemenPesan');
+        Route::patch('/updateStatus/{id}', [PesananController::class, 'updateStatus'])->name('updateStatus'); // Tambahkan rute baru
+
+        Route::get('/home', [PesananController::class, 'totalPendapatan'])->name('home');
+
+
+
 
 
         // Admin logout

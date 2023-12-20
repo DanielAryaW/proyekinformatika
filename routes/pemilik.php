@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PemilikController;
+use App\Http\Controllers\PesananController;
 
 Route::prefix('pemilik')->name('pemilik.')->group(function () {
     Route::middleware(['guest:pemilik', 'PreventBackHistory'])->group(function () {
@@ -14,5 +15,7 @@ Route::prefix('pemilik')->name('pemilik.')->group(function () {
         Route::view('/home', 'back.pages.pemilik.home')->name('home');
         Route::view('/laporanTransaksi', 'back.pages.pemilik.laporanTransaksi')->name('laporanTransaksi');
         Route::post('/logout_handler', [PemilikController::class, 'logoutHandler'])->name('logout_handler');
+
+        Route::get('/laporanTransaksi', [PesananController::class, 'showpemilikPesanan'])->name('laporanTransaksi');
     });
 });
