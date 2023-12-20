@@ -20,9 +20,4 @@ class Jasa extends Model
     {
         return $this->hasMany(Pesanan::class, 'jasa_id');
     }
-
-    public function transaksi()
-    {
-        return $this->belongsTo(Transaksi::class);
-    }
 }

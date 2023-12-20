@@ -1,11 +1,12 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use App\Models\Pesanan;
 use App\Models\Client;
 use App\Models\Jasa;
-use App\Models\Transaksi;
+use App\Http\Controllers\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 
@@ -14,7 +15,7 @@ class PesananController extends Controller
     public function pesanan()
     {
         $title = 'Manajemen Pesanan';
-        $pesanan = Pesanan::with(['jasa', 'client'])->get();
+        $pesanan = Pesanan::with(['jasa', 'client', 'transaksi'])->get();
         return view('back.pages.admin.manajemenPesan', compact('pesanan', 'title'));
     }
 
@@ -38,6 +39,12 @@ class PesananController extends Controller
         // Ambil data Client berdasarkan ID yang ditemukan
         $client = Client::findOrFail($clientId);
 
+        // Ambil ID jasa yang dipilih oleh pengguna
+        $transaksiId = $request->input('transaksi_id') ?? 1 ?? 2 ?? 3;
+
+        // Ambil data Jasa yang sesuai dengan ID yang dipilih
+        $transaksi = Transaksi::findOrFail($transaksiId);
+
         // Buat nomor pesanan yang unik
         $noPesanan = uniqid();
 
@@ -48,6 +55,7 @@ class PesananController extends Controller
         $data = [
             'jasa_id' => $jasa->id,
             'client_id' => $client->id,
+            'transaksi_id' => $transaksi->id,
             'no_pesanan' => $noPesanan,
             'nama_jasa' => $jasa->nama_jasa,
             'nama_pemesan' => $client->name,
@@ -55,6 +63,7 @@ class PesananController extends Controller
             'deskripsi' => $request->input('deskripsi'),
             'foto_desain' => $imageName,
             'harga_total' => $jasa->harga_jasa * $request->input('jumlah_pesan'),
+            'status' => $transaksi->status, // Set status ke nilai default (misalnya, 1 untuk pending)
             'created_at' => now(),
             'updated_at' => now(),
         ];
@@ -118,12 +127,6 @@ class PesananController extends Controller
         ]);
     }
 
-    // return response()->json([
-    //     'success' => true,
-    //     'message' => 'Data berhasil diupdate',
-    //     // 'data' => $updatedData,
-    // ]);
-
     public function destroy($id)
     {
         // Find the record and delete it
@@ -173,22 +176,29 @@ class PesananController extends Controller
         ]);
     }
 
-
     public function updateStatus(Request $request, $id)
     {
-        $transaksi = Transaksi::findOrFail($id);
-        $transaksi->status = $request->status;
-        $transaksi->save();
+        try {
+            // Validate the incoming request
+            $request->validate([
+                'status' => 'required|in:pending,proses,selesai',
+            ]);
 
-        return response()->json(['message' => 'Status berhasil diperbarui']);
+            // Find the pesanan by ID
+            $pesanan = Pesanan::findOrFail($id);
+
+            // Update the status
+            $pesanan->update(['status' => $request->input('status')]);
+
+            return response()->json(['success' => 'Status berhasil diperbarui']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Terjadi kesalahan'], 500);
+        }
     }
-
-    public function getTotalPengerjaan()
+    public function showClientPesanan()
     {
-        // Menghitung jumlah pesanan dengan status 'selesai'
-        $totalPengerjaan = Pesanan::where('status', 'Selesai')->count();
-
-        // Kembalikan nilai totalPengerjaan ke tampilan
-        return view('back.pages.admin.auth.home', ['totalPengerjaan' => $totalPengerjaan]);
+        $title = 'Transaksi Pesanan';
+        $pesanan = Pesanan::with(['jasa', 'client', 'transaksi'])->get();
+        return view('back.pages.client.transaksi', compact('pesanan', 'title'));
     }
 }

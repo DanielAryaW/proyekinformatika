@@ -20,8 +20,8 @@ class Pesanan extends Model
         'nama_jasa',
         'nama_pemesan',
         'harga_total',
-        'bukti_pembayaran'
-
+        'bukti_pembayaran',
+        'status'
     ];
     /**
      * Define the relationship with Client model.

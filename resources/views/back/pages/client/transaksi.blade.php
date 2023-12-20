@@ -40,13 +40,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="table-plus">12345</td>
-                        <td>Cetak Banner</td>
-                        <td>29-03-2018</td>
-                        <td>Rp.100.000</td>
-                        <td>Selesai</td>
-                    </tr>
+                    @foreach ($pesanan as $dt)
+                        @if (Auth::id() == $dt->client->id)
+                            <tr>
+                                <td class="table-plus">{{ $dt->no_pesanan }}</td>
+                                <td>{{ $dt->jasa->nama_jasa }}</td>
+                                <td>{{ $dt->created_at }}</td>
+                                <td>Rp.{{ number_format($dt->harga_total, 2) }}</td>
+                                <td>{{ $dt->transaksi->status }}</td>
+                            </tr>
+                        @endif
+                    @endforeach
                 </tbody>
             </table>
         </div>

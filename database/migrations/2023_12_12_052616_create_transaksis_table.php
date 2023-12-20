@@ -12,8 +12,11 @@ return new class extends Migration {
     {
         Schema::create('transaksis', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('pesanan_id');
             $table->string('status');
             $table->timestamps(); // Add this line to include timestamps
+
+            $table->foreign('pesanan_id')->references('id')->on('pesanans');
         });
     }
 
