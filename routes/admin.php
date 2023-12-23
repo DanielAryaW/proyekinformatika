@@ -16,7 +16,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware(['auth:admin', 'PreventBackHistory'])->group(function () {
         Route::view('/home', 'back.pages.admin.home')->name('home');
 
-
         // Admin Paket Jasa
         Route::view('/paketjasa', 'back.pages.admin.paketjasa')->name('paketjasa');
         Route::get('/paketjasa', [JasaController::class, 'jasa'])->name('paketjasa');
@@ -24,15 +23,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/add', [JasaController::class, 'store'])->name('store');
         Route::get('/edit/{id}', [JasaController::class, 'edit'])->name('edit');
         Route::put('/update{id}', [JasaController::class, 'update'])->name('update');
-        Route::delete('/delete/{id}', [JasaController::class, 'destroy'])->name('delete');
+        Route::delete('/deleteJasa/{id}', [JasaController::class, 'destroy'])->name('deleteJasa');
 
         // Admin Manajemen pesan 
         Route::view('/manajemenPesan', 'back.pages.admin.manajemenPesan')->name('manajemenPesan');
         Route::get('/manajemenPesan', [PesananController::class, 'pesanan'])->name('manajemenPesan');
         Route::delete('/delete/{id}', [PesananController::class, 'destroy'])->name('delete');
-
         Route::patch('/updateStatus/{id}', [PesananController::class, 'updateStatus'])->name('updateStatus'); // Tambahkan rute baru
-
         Route::get('/home', [PesananController::class, 'totalPendapatan'])->name('home');
 
         // Admin logout

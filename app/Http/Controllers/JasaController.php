@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Jasa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\DB;
 
 class JasaController extends Controller
 {
@@ -114,21 +112,20 @@ class JasaController extends Controller
             'success' => true,
             'message' => $isUpdated ? 'Data berhasil diupdate' : 'Tidak ada perubahan pada data',
         ]);
-
-        // return response()->json([
-        //     'success' => true,
-        //     'message' => 'Data berhasil diupdate',
-        //     // 'data' => $updatedData,
-        // ]);
     }
 
     public function destroy($id)
     {
-        // Find the record and delete it
-        $jasa = Jasa::findOrFail($id);
-        $jasa->delete();
+        try {
+            // Find the record and delete it
+            $jasa = Jasa::findOrFail($id);
+            $jasa->delete();
 
-        // Berikan respons JSON
-        return response()->json(['message' => 'Data berhasil dihapus']);
+            // Berikan respons JSON
+            return response()->json(['message' => 'Data berhasil dihapus']);
+        } catch (\Exception $e) {
+            // Tampilkan pesan kesalahan untuk debug
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 }

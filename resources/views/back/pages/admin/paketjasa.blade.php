@@ -46,8 +46,8 @@
                                                     <i class="fa fa-pencil-square-o"></i>
                                                 </a>
                                                 <form id="delete-form-{{ $dt->id }}"
-                                                    action="{{ route('admin.delete', ['id' => $dt->id]) }}" method="post"
-                                                    style="display:inline;">
+                                                    action="{{ route('admin.deleteJasa', ['id' => $dt->id]) }}"
+                                                    method="post" style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="button" class="btn btn-danger btn-xs btn-hapus"
@@ -79,7 +79,7 @@
                     }).then((result) => {
                         if (result.isConfirmed) {
                             // Lakukan penghapusan data
-                            fetch('/admin/delete/' + id, {
+                            fetch('/admin/deleteJasa/' + id, { // Ganti rute delete sesuai dengan yang baru ditambahkan
                                     method: 'DELETE',
                                     headers: {
                                         'Content-Type': 'application/json',
@@ -100,6 +100,7 @@
                                 })
                                 .catch(error => {
                                     // Tampilkan SweetAlert jika terjadi kesalahan
+                                    console.log(error); // Tambahkan ini untuk melihat pesan kesalahan di console
                                     Swal.fire({
                                         title: "Error!",
                                         text: "An error occurred while deleting the record.",
@@ -120,6 +121,5 @@
                     });
                 });
             </script>
-
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         @endsection
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
