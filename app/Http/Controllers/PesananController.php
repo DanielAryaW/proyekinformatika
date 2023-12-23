@@ -15,7 +15,7 @@ class PesananController extends Controller
     public function pesanan()
     {
         $title = 'Manajemen Pesanan';
-        $pesanan = Pesanan::with(['jasa', 'client', 'transaksi'])->get();
+        $pesanan = Pesanan::with(['jasa', 'client'])->get();
         return view('back.pages.admin.manajemenPesan', compact('pesanan', 'title'));
     }
 
@@ -171,7 +171,7 @@ class PesananController extends Controller
     public function showClientPesanan()
     {
         $title = 'Transaksi Pesanan';
-        $pesanan = Pesanan::with(['jasa', 'client', 'transaksi'])->get();
+        $pesanan = Pesanan::with(['jasa', 'client'])->get();
         return view('back.pages.client.transaksi', compact('pesanan', 'title'));
     }
 
@@ -203,10 +203,18 @@ class PesananController extends Controller
         return view('back.pages.admin.home', compact('totalPendapatan'));
     }
 
+    public function totalPendapatanPemilik()
+    {
+        // Mendapatkan total pendapatan dari pesanan-pesanan yang sudah selesai
+        $totalPendapatan = Pesanan::where('status', 'Selesai')->sum('harga_total');
+        return view('back.pages.pemilik.home', compact('totalPendapatan'));
+    }
+
+    // menampilkan data untuk pemilik
     public function showPemilikPesanan()
     {
         $title = 'Laporan Transaksi';
-        $pesanan = Pesanan::with(['jasa', 'client', 'transaksi'])->get();
+        $pesanan = Pesanan::with(['jasa', 'client'])->get();
         return view('back.pages.pemilik.laporanTransaksi', compact('pesanan', 'title'));
     }
 

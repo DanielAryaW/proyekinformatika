@@ -40,6 +40,20 @@
     </script>
     <!-- End Google Tag Manager -->
 
+    <style>
+        .user-info {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .user-info button {
+            margin-left: 15px;
+        }
+    </style>
+
     @stack('stylesheets')
 </head>
 
@@ -68,6 +82,28 @@
         <div class="header-right">
 
             @if (Auth::guard('pemilik')->check())
+                <div class="user-info">
+                    <button class="btn btn-sm btn-flat btn-primary" href="{{ route('pemilik.logout_handler') }}"
+                        onclick="event.preventDefault();document.getElementById('pemilikLogoutForm').submit();">
+                        <i class="dw dw-logout"></i> Logout
+                    </button>
+                    <form action="{{ route('pemilik.logout_handler') }}" id="pemilikLogoutForm" method="POST">
+                        @csrf
+                    </form>
+                </div>
+            @elseif(Auth::guard('admin')->check())
+                <div class="user-info">
+                    <button class="btn btn-sm btn-flat btn-primary" href="{{ route('admin.logout_handler') }}"
+                        onclick="event.preventDefault();document.getElementById('adminLogoutForm').submit();">
+                        <i class="dw dw-logout"></i> Logout
+                    </button>
+                    <form action="{{ route('admin.logout_handler') }}" id="adminLogoutForm" method="POST">
+                        @csrf
+                    </form>
+                </div>
+            @endif
+
+            {{-- @if (Auth::guard('pemilik')->check())
                 <div class="user-info-dropdown">
                     <div class="dropdown">
                         <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
@@ -103,7 +139,7 @@
                         </div>
                     </div>
                 </div>
-            @endif
+            @endif --}}
 
         </div>
     </div>

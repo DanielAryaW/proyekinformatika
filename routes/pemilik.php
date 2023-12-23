@@ -16,6 +16,8 @@ Route::prefix('pemilik')->name('pemilik.')->group(function () {
         Route::view('/laporanTransaksi', 'back.pages.pemilik.laporanTransaksi')->name('laporanTransaksi');
         Route::post('/logout_handler', [PemilikController::class, 'logoutHandler'])->name('logout_handler');
 
+        Route::get('/home', [PesananController::class, 'totalPendapatanPemilik'])->name('home');
+
         Route::get('/laporanTransaksi', [PesananController::class, 'showpemilikPesanan'])->name('laporanTransaksi');
     });
 });

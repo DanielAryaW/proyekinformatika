@@ -39,7 +39,7 @@ $("document").ready(function () {
         ],
         language: {
             info: "_START_-_END_ of _TOTAL_ entries",
-            searchPlaceholder: "Search",
+            searchPlaceholder: "",
             paginate: {
                 next: '<i class="ion-chevron-right"></i>',
                 previous: '<i class="ion-chevron-left"></i>',
@@ -73,7 +73,7 @@ $("document").ready(function () {
         ],
         language: {
             info: "_START_-_END_ of _TOTAL_ entries",
-            searchPlaceholder: "Search",
+            searchPlaceholder: "",
             paginate: {
                 next: '<i class="ion-chevron-right"></i>',
                 previous: '<i class="ion-chevron-left"></i>',

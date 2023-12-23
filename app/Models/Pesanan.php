@@ -43,14 +43,4 @@ class Pesanan extends Model
         return $this->belongsTo(Jasa::class, 'jasa_id');
     }
 
-    /**
-     * Define the relationship with Transaksi model.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function transaksi()
-    {
-        return $this->belongsTo(Transaksi::class, 'transaksi_id');
-    }
-
 }

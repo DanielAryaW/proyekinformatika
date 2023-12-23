@@ -40,6 +40,19 @@
     </script>
     <!-- End Google Tag Manager -->
 
+    <style>
+        .user-info {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .user-info button {
+            margin-left: 15px;
+        }
+    </style>
     @stack('stylesheets')
 </head>
 
@@ -66,44 +79,28 @@
             </div>
         </div>
         <div class="header-right">
-
             @if (Auth::guard('pemilik')->check())
-                <div class="user-info-dropdown">
-                    <div class="dropdown">
-                        <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                            <span class="user-icon">
-                                <img src="/back/vendors/images/photo1.jpg" alt="" />
-                            </span>
-                            <span class="user-name">
-                                {{ Auth::guard('pemilik')->user()->name }}
-                            </span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                            <a class="dropdown-item" href="{{ route('pemilik.logout_handler') }}"
-                                onclick="event.preventDefault();document.getElementById('pemilikLogoutForm').submit();"><i
-                                    class="dw dw-logout"></i> Log Out</a>
-                            <form action="{{ route('pemilik.logout_handler') }}" id="pemilikLogoutForm" method="POST">
-                                @csrf</form>
-                        </div>
-                    </div>
+                <div class="user-info">
+                    <button class="btn btn-sm btn-flat btn-primary" href="{{ route('pemilik.logout_handler') }}"
+                        onclick="event.preventDefault();document.getElementById('pemilikLogoutForm').submit();">
+                        <i class="dw dw-logout"></i> Logout
+                    </button>
+                    <form action="{{ route('pemilik.logout_handler') }}" id="pemilikLogoutForm" method="POST">
+                        @csrf
+                    </form>
                 </div>
-            @elseif(Auth::guard('client')->check())
-                <div class="user-info-dropdown">
-                    <div class="dropdown">
-                        <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
-                            <span class="user-icon">
-                                <img src="/back/vendors/images/photo1.jpg" alt="" />
-                            </span>
-                            <span class="user-name">
-                                {{ Auth::guard('client')->user()->name }}
-                            </span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                            <a class="dropdown-item" href="login.html"><i class="dw dw-logout"></i> Log Out</a>
-                        </div>
-                    </div>
+            @elseif(Auth::guard('admin')->check())
+                <div class="user-info">
+                    <button class="btn btn-sm btn-flat btn-primary" href="{{ route('admin.logout_handler') }}"
+                        onclick="event.preventDefault();document.getElementById('adminLogoutForm').submit();">
+                        <i class="dw dw-logout"></i> Logout
+                    </button>
+                    <form action="{{ route('admin.logout_handler') }}" id="adminLogoutForm" method="POST">
+                        @csrf
+                    </form>
                 </div>
             @endif
+
 
         </div>
     </div>
@@ -152,8 +149,6 @@
     <script src="/back/vendors/scripts/script.min.js"></script>
     <script src="/back/vendors/scripts/process.js"></script>
     <script src="/back/vendors/scripts/layout-settings.js"></script>
-
-    <!-- js -->
     <script src="/back/src/plugins/datatables/js/jquery.dataTables.min.js"></script>
     <script src="/back/src/plugins/datatables/js/dataTables.bootstrap4.min.js"></script>
     <script src="/back/src/plugins/datatables/js/dataTables.responsive.min.js"></script>

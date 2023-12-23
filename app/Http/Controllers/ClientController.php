@@ -6,8 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Client;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -48,24 +46,6 @@ class ClientController extends Controller
         }
     }
 
-    function check(Request $request)
-    {
-        //Validate inputs
-        $request->validate([
-            'email' => 'required|email|exists:clients,email',
-            'password' => 'required|min:5|max:30'
-        ], [
-            'email.exists' => 'Email tidak terdaftar dalam sistem'
-        ]);
-
-        $creds = $request->only('email', 'password');
-        if (Auth::guard('client')->attempt($creds)) {
-            return redirect()->route('client.home');
-        } else {
-            return redirect()->route('client.login')->with('fail', 'Password Salah');
-        }
-    }
-
     public function loginHandler(Request $request)
     {
         $fieldType = filter_var($request->login_id, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
@@ -101,6 +81,24 @@ class ClientController extends Controller
         } else {
             session()->flash('fail', 'Password Salah');
             return redirect()->route('client.login');
+        }
+    }
+
+    function check(Request $request)
+    {
+        //Validate inputs
+        $request->validate([
+            'email' => 'required|email|exists:clients,email',
+            'password' => 'required|min:5|max:30'
+        ], [
+            'email.exists' => 'Email tidak terdaftar dalam sistem'
+        ]);
+
+        $creds = $request->only('email', 'password');
+        if (Auth::guard('client')->attempt($creds)) {
+            return redirect()->route('client.home');
+        } else {
+            return redirect()->route('client.login')->with('fail', 'Password Salah');
         }
     }
 
@@ -247,4 +245,5 @@ class ClientController extends Controller
         sendEmail($mailConfig);
         return redirect()->route('client.login')->with('success', 'Selesai!, Password kamu telah diganti. Gunakan password baru untuk login dalam sistem.');
     }
+
 }

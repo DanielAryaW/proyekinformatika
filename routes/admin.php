@@ -35,10 +35,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('/home', [PesananController::class, 'totalPendapatan'])->name('home');
 
-
-
-
-
         // Admin logout
         Route::post('/logout_handler', [AdminController::class, 'logoutHandler'])->name('logout_handler');
     });

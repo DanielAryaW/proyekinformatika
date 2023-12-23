@@ -40,6 +40,19 @@
     </script>
     <!-- End Google Tag Manager -->
 
+    <style>
+        .user-info {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .user-info button {
+            margin-left: 15px;
+        }
+    </style>
     @stack('stylesheets')
 </head>
 
@@ -55,7 +68,7 @@
         </div>
         <div class="header-right">
 
-            @if (Auth::guard('client')->check())
+            {{-- @if (Auth::guard('client')->check())
                 <div class="user-info-dropdown">
                     <div class="dropdown">
                         <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
@@ -90,6 +103,28 @@
                             <a class="dropdown-item" href="login.html"><i class="dw dw-logout"></i> Log Out</a>
                         </div>
                     </div>
+                </div>
+            @endif --}}
+
+            @if (Auth::guard('client')->check())
+                <div class="user-info">
+                    <button class="btn btn-sm btn-flat btn-primary" href="{{ route('client.logout_handler') }}"
+                        onclick="event.preventDefault();document.getElementById('clientLogoutForm').submit();">
+                        <i class="dw dw-logout"></i> Logout
+                    </button>
+                    <form action="{{ route('client.logout_handler') }}" id="clientLogoutForm" method="POST">
+                        @csrf
+                    </form>
+                </div>
+            @elseif(Auth::guard('admin')->check())
+                <div class="user-info">
+                    <button class="btn btn-sm btn-flat btn-primary" href="{{ route('admin.logout_handler') }}"
+                        onclick="event.preventDefault();document.getElementById('adminLogoutForm').submit();">
+                        <i class="dw dw-logout"></i> Logout
+                    </button>
+                    <form action="{{ route('admin.logout_handler') }}" id="adminLogoutForm" method="POST">
+                        @csrf
+                    </form>
                 </div>
             @endif
 
